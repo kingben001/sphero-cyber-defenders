@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cyber Defenders | Phishing + Sphero BOLT</title>
+  <style>
+    :root {
+      --navy:#102a43; --blue:#1769aa; --cyan:#73d2f6; --gold:#f0b429;
+      --green:#23815a; --red:#b42318; --ink:#152536; --muted:#5f6f80;
+      --line:#cbd5e1; --paper:#fff; --canvas:#f3f7fb; --pale-blue:#eaf5fc;
+      --pale-green:#e8f6ee; --pale-red:#fff0ee; --pale-gold:#fff7df;
+      --shadow:0 14px 32px rgba(16,42,67,.10); --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--canvas);color:var(--ink);font:16px/1.52 Arial,Helvetica,sans-serif}
+    button,input,textarea{font:inherit}
+    button{cursor:pointer}
+    a{color:var(--blue)}
+    :focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+    .topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:18px;padding:12px clamp(16px,4vw,54px);background:rgba(16,42,67,.98);color:#fff;border-bottom:4px solid var(--cyan)}
+    .brand{display:flex;align-items:center;gap:10px;min-width:max-content;font-weight:800}
+    .orb{display:grid;place-items:center;width:38px;height:38px;border:3px solid #fff;border-radius:50%;background:radial-gradient(circle at 38% 35%,#fff 0 10%,var(--cyan) 11% 25%,var(--blue) 26% 58%,var(--navy) 59%)}
+    .brand small{display:block;color:#cdeefa;font-size:10px;letter-spacing:.14em}
+    .tabs{display:flex;gap:4px;overflow:auto;flex:1}
+    .tabs button{border:0;border-radius:999px;padding:9px 13px;background:transparent;color:#dce8f4;white-space:nowrap;font-weight:700}
+    .tabs button:hover{background:rgba(255,255,255,.1)}
+    .tabs button[aria-selected=true]{background:var(--cyan);color:var(--navy)}
+    .clock{display:flex;align-items:center;gap:7px;min-width:max-content;font-variant-numeric:tabular-nums;font-weight:800}
+    .clock button{width:30px;height:30px;border:1px solid rgba(255,255,255,.35);border-radius:50%;background:transparent;color:#fff}
+    .clock button:hover{background:rgba(255,255,255,.12)}
+    main{min-height:calc(100vh - 70px)}
+    .page{display:none}.page.active{display:block}
+    .shell{width:min(1160px,calc(100% - 34px));margin:auto;padding:42px 0 72px}
+    .eyebrow{margin:0 0 9px;color:var(--blue);font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+    h1,h2,h3,h4{line-height:1.1;margin:0 0 14px}h1{font-size:clamp(42px,7vw,78px);letter-spacing:-.045em}h2{font-size:clamp(30px,4.5vw,52px);letter-spacing:-.03em}h3{font-size:25px}h4{font-size:18px}
+    .lede{max-width:760px;color:var(--muted);font-size:20px}
+    .hero{display:grid;grid-template-columns:1.12fr .88fr;overflow:hidden;border-radius:26px;background:#fff;box-shadow:var(--shadow)}
+    .hero-copy{padding:clamp(38px,7vw,86px);background:linear-gradient(100deg,#fff 0%,#fff 70%,#f2fbff 100%)}
+    .hero-copy h1{max-width:720px}.hero-copy .lede{color:var(--blue);font-weight:700}
+    .hero-art{display:grid;place-items:center;min-height:400px;background:var(--navy);position:relative;overflow:hidden}
+    .hero-art:before,.hero-art:after{content:"";position:absolute;border-radius:50%;border:1px solid rgba(115,210,246,.32)}
+    .hero-art:before{width:430px;height:430px}.hero-art:after{width:300px;height:300px}
+    .robot{position:relative;z-index:2;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle at 34% 29%,#fff 0 6%,#73d2f6 7% 20%,#2d8aca 21% 51%,#153e69 52% 100%);border:10px solid #dceefa;box-shadow:0 0 0 15px rgba(115,210,246,.15),0 0 60px rgba(115,210,246,.4)}
+    .robot:before{content:"BOLT";position:absolute;inset:75px 0 auto;text-align:center;color:#fff;font-weight:900;letter-spacing:.18em}
+    .button-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.btn{border:2px solid var(--navy);border-radius:11px;padding:10px 17px;background:var(--navy);color:#fff;font-weight:800}.btn:hover{transform:translateY(-1px);box-shadow:0 7px 17px rgba(16,42,67,.16)}.btn.secondary{background:#fff;color:var(--navy)}.btn.cyan{background:var(--cyan);border-color:var(--cyan);color:var(--navy)}.btn.small{padding:7px 12px;font-size:14px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .card{padding:24px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;box-shadow:0 7px 22px rgba(16,42,67,.06)}
+    .card.blue{border-left:8px solid var(--blue);background:var(--pale-blue)}.card.green{border-left:8px solid var(--green);background:var(--pale-green)}.card.red{border-left:8px solid var(--red);background:var(--pale-red)}.card.gold{border-left:8px solid var(--gold);background:var(--pale-gold)}
+    .card p:last-child,.card ul:last-child{margin-bottom:0}.muted{color:var(--muted)}
+    .tag{display:inline-block;padding:4px 9px;border-radius:999px;background:#d9f1fb;color:var(--navy);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.tag.red{background:#ffe0dc;color:var(--red)}.tag.gold{background:#ffedb3;color:#785600}.tag.green{background:#d6efdf;color:var(--green)}
+    .section-heading{margin:54px 0 20px}.section-heading p{max-width:760px;color:var(--muted);font-size:18px}
+    .timeline{display:grid;gap:10px}.time-row{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:start;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:#fff}.time-row strong{color:var(--blue)}
+    .callout{padding:19px 22px;border-radius:15px;border:2px dashed var(--blue);background:#f5fbff}.callout strong{color:var(--blue)}
+    .script{padding:20px;border-left:5px solid var(--gold);background:var(--pale-gold);font-size:18px}.script p:last-child{margin-bottom:0}
+    .message{position:relative;padding:22px;border:1px solid #f0c2bd;border-radius:14px;background:#fff}.message .fake-link{display:inline-block;margin-top:10px;padding:9px 12px;border-radius:8px;background:#eaf5fc;color:var(--blue);font-weight:700}.flag{padding:2px 5px;border-radius:4px;background:#ffe0dc;color:var(--red);font-weight:800}
+    .chain{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:stretch}.chain div{display:flex;align-items:center;justify-content:center;min-height:96px;padding:12px;border-radius:12px;background:var(--pale-red);border:1px solid #f0c2bd;text-align:center;font-weight:800}.chain div:not(:last-child):after{content:"→";position:absolute;margin-left:calc(100% + 4px);color:var(--red);font-size:22px}.chain div{position:relative}.chain div:last-child{background:var(--pale-gold);border-color:#ebd48d}
+    .response{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.response .step{padding:22px;border-radius:15px;background:#fff;text-align:center;box-shadow:0 6px 16px rgba(16,42,67,.07)}.step strong{display:block;font-size:32px}.step:nth-child(1) strong{color:var(--blue)}.step:nth-child(2) strong{color:var(--gold)}.step:nth-child(3) strong{color:var(--green)}
+    .block-sequence{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:16px 0}.block{padding:10px 13px;border-radius:9px;background:#f0f4f8;border:2px solid #b9c6d3;font-weight:800}.block.blue{background:#dff2fb;border-color:#73c7e7}.block.gold{background:#fff0bd;border-color:#e4c65a}.block.green{background:#d9f0e1;border-color:#8dca9f}.arrow{color:var(--muted);font-weight:900}
+    .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;background:#fff}table{width:100%;border-collapse:collapse;min-width:620px}th,td{padding:13px 15px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:var(--pale-blue);color:var(--navy)}tr:last-child td{border-bottom:0}
+    details{border:1px solid var(--line);border-radius:13px;background:#fff;margin:10px 0}summary{padding:15px 17px;cursor:pointer;font-weight:800}details>div{padding:0 17px 17px}
+    .checklist{display:grid;gap:9px}.check{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;padding:12px;border:1px solid var(--line);border-radius:10px;background:#fff}.check input{width:18px;height:18px;margin-top:3px;accent-color:var(--green)}.check:has(input:checked){background:var(--pale-green);border-color:#9bcdb3}.check:has(input:checked) label{text-decoration:line-through;color:#587064}
+    .notice{display:flex;gap:12px;align-items:flex-start;padding:15px 17px;border-radius:12px;background:#eef5fb;border:1px solid #b8d8ed}.notice strong{color:var(--blue)}
+    .optional{position:relative}.optional:before{content:"OPTIONAL IF TIME";position:absolute;top:18px;right:18px;padding:5px 8px;border-radius:999px;background:#fff0bd;color:#785600;font-size:11px;font-weight:900;letter-spacing:.08em}
+    .print-card{break-inside:avoid;padding:20px;border:2px dashed #9aabbc;border-radius:13px;background:#fff}.print-card h4{margin-bottom:8px}
+    .answer{display:none;margin-top:12px;padding:12px;border-radius:10px;background:var(--pale-green);border-left:5px solid var(--green)}.answer.show{display:block}
+    .present-shell{width:min(1180px,calc(100% - 34px));margin:auto;padding:30px 0 62px}.present-toolbar{display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:18px}.present-toolbar h2{font-size:30px;margin:0}.slide-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}.slide-controls span{min-width:62px;text-align:center;font-weight:800}.stage{position:relative;min-height:550px;padding:clamp(28px,6vw,74px);border-radius:24px;background:linear-gradient(135deg,#fff 0%,#f5fbff 100%);box-shadow:var(--shadow);overflow:hidden}.stage:after{content:"CYBER DEFENDERS";position:absolute;right:-36px;bottom:36px;transform:rotate(-90deg);color:#d7e8f1;font-weight:900;letter-spacing:.18em}.slide{display:none;position:relative;z-index:1;max-width:880px}.slide.active{display:block}.slide h1{font-size:clamp(38px,7vw,74px)}.slide h2{font-size:clamp(32px,5vw,58px)}.slide .kicker{color:var(--blue);font-weight:900;letter-spacing:.14em;text-transform:uppercase}.slide .big-quote{max-width:830px;padding:24px;border-left:8px solid var(--gold);background:var(--pale-gold);font-size:clamp(24px,4vw,42px);font-weight:800}.slide .slide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.slide .tile{padding:20px;border-radius:14px;background:#fff;border:1px solid var(--line);font-size:18px}.slide .tile strong{display:block;font-size:30px;margin-bottom:5px}.slide .red{color:var(--red)}.slide .green{color:var(--green)}.slide .blue{color:var(--blue)}.slide .gold{color:#9a6b00}.slide-nav{display:flex;justify-content:space-between;margin-top:15px}.thumbs{display:flex;gap:8px;overflow:auto;margin-top:15px}.thumbs button{min-width:38px;height:34px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--navy);font-weight:800}.thumbs button.active{background:var(--cyan);border-color:var(--cyan)}
+    .footer-note{margin-top:34px;color:var(--muted);font-size:14px}.footer-note a{font-weight:700}
+    @media(max-width:800px){.topbar{align-items:flex-start;flex-wrap:wrap}.brand{width:100%}.clock{margin-left:auto;margin-top:-46px}.hero,.grid-2,.grid-3{grid-template-columns:1fr}.hero-art{min-height:250px}.chain{grid-template-columns:1fr}.chain div:not(:last-child):after{content:"↓";position:absolute;top:100%;right:50%;margin:3px 0 0;font-size:20px}.response,.slide .slide-grid{grid-template-columns:1fr}.time-row{grid-template-columns:1fr;gap:2px}.present-toolbar{align-items:flex-start;flex-direction:column}.slide-controls{justify-content:flex-start}.stage{min-height:540px;padding:27px}}
+    @media print{.topbar,.button-row,.present-toolbar,.slide-nav,.thumbs,.footer-note{display:none!important}.page{display:block!important}.shell,.present-shell{width:100%;padding:0}.card,.hero,.stage{box-shadow:none;break-inside:avoid}.hero-art{display:none}.hero{display:block}.optional{border:2px solid #aaa}.page:not(#guide){display:none!important}body{background:#fff;font-size:12px}h1{font-size:42px}h2{font-size:30px}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="orb" aria-hidden="true"></span><span><small>CYBER DEFENDERS</small>Phishing + Sphero BOLT</span></div>
+    <nav class="tabs" aria-label="Lesson sections">
+      <button data-page="guide" aria-selected="true">Run of show</button>
+      <button data-page="present" aria-selected="false">Present to students</button>
+      <button data-page="activity" aria-selected="false">Exercise 3</button>
+      <button data-page="extension" aria-selected="false">Optional 4</button>
+      <button data-page="printables" aria-selected="false">Printables</button>
+    </nav>
+    <div class="clock"><button id="clockToggle" title="Start or pause timer">▶</button><span id="clockDisplay">45:00</span><button id="clockReset" title="Reset timer">↺</button></div>
+  </header>
+
+  <main>
+    <section id="guide" class="page active" role="tabpanel" tabindex="-1">
+      <div class="shell">
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">7th-grade mini-lesson + robot challenge</p>
+            <h1>Pause the Click.</h1>
+            <p class="lede">Learn how phishing tricks people, then program a Sphero BOLT to model the safe response: Stop, Check, Tell.</p>
+            <div class="button-row"><button class="btn cyan" data-page-go="present">Start student presentation</button><button class="btn secondary" data-page-go="activity">Jump to Exercise 3</button></div>
+          </div>
+          <div class="hero-art" aria-label="Illustration of a Sphero BOLT robot"><div class="robot"></div></div>
+        </section>
+
+        <div class="section-heading"><p class="eyebrow">The goal</p><h2>Students should leave knowing three things.</h2></div>
+        <div class="grid-3">
+          <article class="card blue"><span class="tag">1 · Identify</span><h3>What phishing is</h3><p>A fake message designed to trick someone into clicking, sharing information, sending money, or downloading something unsafe.</p></article>
+          <article class="card gold"><span class="tag gold">2 · Predict</span><h3>What a click can cause</h3><p>A fake login page, stolen password, account takeover, exposed private information, malware, or money loss.</p></article>
+          <article class="card green"><span class="tag green">3 · Respond</span><h3>What to do next</h3><p>Stop. Check through a trusted source. Tell a trusted adult or use the approved reporting process.</p></article>
+        </div>
+
+        <div class="section-heading"><p class="eyebrow">45-minute plan</p><h2>Run of show</h2><p>If time gets short, skip Optional Exercise 4. Never skip the explanation, Exercise 3 debrief, or the exit ticket.</p></div>
+        <div class="timeline">
+          <div class="time-row"><strong>0–4 min</strong><span><b>Welcome + quick question:</b> “Has anyone heard the word phishing?” Take a few responses without requiring anyone to share a personal experience.</span></div>
+          <div class="time-row"><strong>4–9 min</strong><span><b>Teach the idea:</b> Define phishing in student-friendly language. Ask students to repeat “fake message, real goal.”</span></div>
+          <div class="time-row"><strong>9–14 min</strong><span><b>Show an example:</b> Let students find the clues before you reveal them. Discuss what could happen after a click.</span></div>
+          <div class="time-row"><strong>14–18 min</strong><span><b>Model the response:</b> Practice Stop, Check, Tell with hand motions.</span></div>
+          <div class="time-row"><strong>18–32 min</strong><span><b>Required Exercise 3:</b> Program the BOLT as a Stop–Check–Tell alert and test it with two fictional messages.</span></div>
+          <div class="time-row"><strong>32–40 min</strong><span><b>Optional Exercise 4:</b> Code the Phishing Detector only if every team is ready.</span></div>
+          <div class="time-row"><strong>40–45 min</strong><span><b>Exit ticket + close:</b> Students answer the phishing questions independently. Exercise 4 is not required.</span></div>
+        </div>
+
+        <div class="section-heading"><p class="eyebrow">Before students arrive</p><h2>Quick setup checklist</h2></div>
+        <div class="grid-2">
+          <div class="card"><div class="checklist">
+            <div class="check"><input type="checkbox" id="c1"><label for="c1">Charge each BOLT and device; connect one robot per team.</label></div>
+            <div class="check"><input type="checkbox" id="c2"><label for="c2">Open Sphero Edu and choose Block Coding.</label></div>
+            <div class="check"><input type="checkbox" id="c3"><label for="c3">Place robots on a desk or parking mat. Movement is not needed for the required activity.</label></div>
+            <div class="check"><input type="checkbox" id="c4"><label for="c4">Print or display the two fictional message cards in Printables.</label></div>
+            <div class="check"><input type="checkbox" id="c5"><label for="c5">Write STOP, CHECK, and TELL where everyone can see them.</label></div>
+          </div></div>
+          <div class="card callout"><strong>Important BOLT note</strong><p>The old manual used names such as custom functions, variables, and risk scores. Those were teaching ideas—not guaranteed button names in Sphero Edu. This version makes Exercise 3 with basic blocks you are most likely to see: Start, Set Main LED, Wait/Delay, and Stop.</p><p>If your editor uses a slightly different label, use the closest block. The learning goal is the sequence, not a particular word on the screen.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="present" class="page" role="tabpanel" tabindex="-1">
+      <div class="present-shell">
+        <div class="present-toolbar"><div><p class="eyebrow">Project this section</p><h2 id="slideTitle">Pause the Click</h2></div><div class="slide-controls"><button class="btn small secondary" id="prevSlide">← Back</button><span id="slideCounter">1 / 13</span><button class="btn small" id="nextSlide">Next →</button><button class="btn small cyan" id="fullScreen">Full screen</button></div></div>
+        <div class="stage" id="stage" aria-live="polite">
+          <article class="slide active"><p class="kicker">Cyber Defenders · 7th grade</p><h1>Pause the Click.</h1><p class="lede">Learn the trick. Predict the consequence. Program the safe response.</p><div class="button-row"><span class="tag">Today’s mission</span></div></article>
+          <article class="slide"><p class="kicker">Warm-up</p><h2>Has anyone heard of phishing?</h2><p class="big-quote">You can answer yes, no, or “I’m not sure.”</p><p>Phishing is something we can learn to spot. No one has to share a personal story.</p></article>
+          <article class="slide"><p class="kicker">What is phishing?</p><h2>A fake message with a real goal.</h2><p class="lede">Phishing is when someone pretends to be trustworthy to trick you into clicking, sharing information, sending money, or downloading something unsafe.</p><div class="slide-grid"><div class="tile"><strong class="blue">Fake</strong>It may look like a school, game, friend, or company.</div><div class="tile"><strong class="gold">Tricky</strong>It creates urgency, excitement, or fear.</div><div class="tile"><strong class="red">Goal</strong>It wants information or an unsafe action.</div></div></article>
+          <article class="slide"><p class="kicker">Look at the evidence</p><h2>Which clues do you see?</h2><div class="message"><b>From:</b> Game Rewards &lt;rewards@play-gam3s.example&gt;<br><b>Subject:</b> You won 5,000 coins!<p>Click now in 10 minutes or lose your prize. Send your password to unlock it.</p><span class="fake-link">Unlock my prize</span></div><p>Turn and talk: What feels unusual? Find at least two clues.</p></article>
+          <article class="slide"><p class="kicker">Possible clues</p><h2>Slow down when you see…</h2><div class="slide-grid"><div class="tile"><strong class="red">Urgency</strong>“Do it now!”</div><div class="tile"><strong class="gold">Prize</strong>An unexpected reward</div><div class="tile"><strong class="red">Private info</strong>A password request</div></div><p class="lede">One clue is not always proof. Gather evidence and verify through a trusted method.</p></article>
+          <article class="slide"><p class="kicker">What can happen?</p><h2>A click can open a chain of risk.</h2><div class="chain"><div>Click</div><div>Fake login page</div><div>Password stolen</div><div>Account takeover</div><div>Private info or malware</div></div><p class="muted">These are possible consequences—not a promise that every click causes all of them.</p></article>
+          <article class="slide"><p class="kicker">Your safe response</p><h2>Stop · Check · Tell</h2><div class="response"><div class="step"><strong>STOP</strong>Do not click, reply, download, or scan while rushed.</div><div class="step"><strong>CHECK</strong>Who sent it? What does it ask? Did you expect it?</div><div class="step"><strong>TELL</strong>Show a trusted adult or use the approved report button.</div></div></article>
+          <article class="slide"><p class="kicker">Meet your BOLT</p><h2>The robot will act like an alert.</h2><p class="lede">For today’s required activity, keep it parked. We will use simple color blocks to show the response sequence.</p><div class="block-sequence"><span class="block blue">Set Main LED: blue</span><span class="arrow">→</span><span class="block gold">Set Main LED: yellow</span><span class="arrow">→</span><span class="block green">Set Main LED: green</span></div><p>Blue = Stop · Yellow = Check · Green = Tell</p></article>
+          <article class="slide"><p class="kicker">Required Exercise 3</p><h2>Build the Stop–Check–Tell alert.</h2><ol><li>Open Block Coding.</li><li>Build the three-color sequence.</li><li>Run it once.</li><li>Use a partner’s message card and name two clues.</li><li>Run it again while saying the safe response.</li></ol></article>
+          <article class="slide"><p class="kicker">Test your thinking</p><h2>Predict → Run → Explain</h2><p class="big-quote">What does the robot know? What does a human still need to decide?</p><p>The BOLT can show a programmed alert. It cannot know whether a message is truly safe. People use context and evidence.</p></article>
+          <article class="slide"><p class="kicker">Optional if time</p><h2>Code the Phishing Detector.</h2><p class="lede">If a team is ready, use an if/then/else rule: two or more warning clues → red alert; fewer clues → yellow “check.”</p><p class="muted">This is an extension. It is not needed for the exit ticket.</p></article>
+          <article class="slide"><p class="kicker">Exit ticket</p><h2>Show what you learned.</h2><ol><li>What is phishing?</li><li>Name two clues that should make you slow down.</li><li>Name one possible consequence of clicking, and what you should do instead.</li></ol><p class="tag green">You do not need Optional Exercise 4.</p></article>
+          <article class="slide"><p class="kicker">Close</p><h1>STOP. CHECK. TELL.</h1><p class="lede">You are a cyber defender.</p></article>
+        </div>
+        <div class="slide-nav"><button class="btn secondary" id="stagePrev">← Previous</button><button class="btn" id="stageNext">Next →</button></div>
+        <div class="thumbs" id="thumbs" aria-label="Choose a presentation slide"></div>
+      </div>
+    </section>
+
+    <section id="activity" class="page" role="tabpanel" tabindex="-1">
+      <div class="shell">
+        <p class="eyebrow">Required robot activity · 14 minutes</p><h1>Exercise 3: Stop, Verify, Report</h1>
+        <p class="lede">This is the main BOLT activity. It is intentionally simple enough to build in Sphero Edu without custom functions or a complicated detector.</p>
+        <div class="notice"><strong>Use the language students will remember:</strong><span>Stop = pause your hands. Check = look for evidence. Tell = report to a trusted adult or approved system.</span></div>
+        <div class="section-heading"><p class="eyebrow">Materials</p><h2>One team needs</h2></div>
+        <div class="grid-3"><div class="card"><h3>Robot</h3><p>One charged BOLT and one device with Sphero Edu.</p></div><div class="card"><h3>Cards</h3><p>Two fictional message cards from Printables. Never use real accounts, passwords, or student information.</p></div><div class="card"><h3>Workspace</h3><p>A desk or parking mat. Rolling is not required; color is the signal.</p></div></div>
+        <div class="section-heading"><p class="eyebrow">Facilitator model</p><h2>Say this first</h2></div>
+        <div class="script"><p>“Your BOLT is going to be a cyber-alert robot. It is not deciding whether a message is safe. It is reminding us to use the safe sequence: Stop, Check, Tell.”</p><p>“The colors are our memory tool: blue means Stop, yellow means Check, and green means Tell.”</p></div>
+        <div class="section-heading"><p class="eyebrow">Build it</p><h2>Basic block sequence</h2><p>Block names can vary slightly by app version. Look for the closest visible block.</p></div>
+        <div class="card">
+          <div class="block-sequence"><span class="block">When Program Starts</span><span class="arrow">→</span><span class="block blue">Set Main LED to Blue</span><span class="arrow">→</span><span class="block">Wait / Delay 2 sec</span><span class="arrow">→</span><span class="block gold">Set Main LED to Yellow</span><span class="arrow">→</span><span class="block">Wait / Delay 2 sec</span><span class="arrow">→</span><span class="block green">Set Main LED to Green</span><span class="arrow">→</span><span class="block">Stop / End</span></div>
+          <p><b>If you cannot find a text-display block:</b> skip it. The colored LEDs are enough. Put the words STOP, CHECK, and TELL on paper where students can see them.</p>
+          <p><b>If you cannot find Wait/Delay:</b> place the three color blocks in order and have the partner say each word as the color changes.</p>
+        </div>
+        <div class="section-heading"><p class="eyebrow">Run the activity</p><h2>Exact instructions</h2></div>
+        <div class="grid-2">
+          <article class="card blue"><span class="tag">Step 1 · 2 min</span><h3>Assign roles</h3><ul><li><b>Coder:</b> places the blocks.</li><li><b>Reader:</b> reads the fictional message.</li><li><b>Checker:</b> listens for two clues and watches the BOLT.</li><li>If there are fewer than three students, combine Checker with Reader.</li></ul></article>
+          <article class="card blue"><span class="tag">Step 2 · 3 min</span><h3>Build and run</h3><ol><li>Build the sequence above.</li><li>Run it once without a message.</li><li>Ask: “What does each color mean?”</li><li>Fix the order if the colors do not match the words.</li></ol></article>
+          <article class="card gold"><span class="tag gold">Step 3 · 4 min</span><h3>Round 1: spot the clues</h3><ol><li>Reader shows Card A.</li><li>Everyone silently finds clues.</li><li>Reader says two clues aloud.</li><li>Run the BOLT and say Stop, Check, Tell with it.</li></ol></article>
+          <article class="card green"><span class="tag green">Step 4 · 4 min</span><h3>Round 2: change roles</h3><ol><li>Swap roles and use Card B.</li><li>Before touching the robot, answer: “What should we do before clicking?”</li><li>Run the sequence.</li><li>Explain one possible consequence of clicking.</li></ol></article>
+        </div>
+        <div class="section-heading"><p class="eyebrow">Debrief · 2 minutes</p><h2>Ask these questions</h2></div>
+        <div class="grid-3"><div class="card"><h3>Evidence</h3><p>“What two clues made you slow down?”</p></div><div class="card"><h3>Consequence</h3><p>“What might a fake link lead to?”</p></div><div class="card"><h3>Response</h3><p>“Who could you tell at school or at home?”</p></div></div>
+        <div class="callout" style="margin-top:20px"><strong>Key correction to make aloud:</strong> “The robot is an analogy. It can show a programmed alert, but it cannot decide a person’s intent or prove that a message is safe. A human still checks the evidence.”</div>
+      </div>
+    </section>
+
+    <section id="extension" class="page" role="tabpanel" tabindex="-1">
+      <div class="shell">
+        <div class="optional"><p class="eyebrow">Optional Exercise 4 · 8 minutes</p><h1>Code the Phishing Detector.</h1><p class="lede">Use this only after Exercise 3 is complete. Do not use it as part of the exit ticket.</p></div>
+        <div class="notice"><strong>Time rule:</strong><span>If teams are still building Exercise 3, skip this page. Students can meet the lesson goal without it.</span></div>
+        <div class="section-heading"><p class="eyebrow">Simplified challenge</p><h2>Turn clues into a choice.</h2></div>
+        <div class="grid-2"><div class="card gold"><h3>Student rule</h3><p>Count the warning clues on a message:</p><ul><li>Urgency</li><li>Unexpected prize</li><li>Password or personal-data request</li><li>Odd sender or link</li></ul><p><b>Two or more clues:</b> show red “PHISH?”<br><b>Fewer than two:</b> show yellow “CHECK.”</p></div><div class="card"><h3>Teacher model</h3><div class="block-sequence"><span class="block">Start</span><span class="arrow">→</span><span class="block">Set clues = 2</span><span class="arrow">→</span><span class="block">If clues ≥ 2</span><span class="arrow">→</span><span class="block" style="border-color:#efa39b;background:#ffe0dc">Red alert</span></div><div class="block-sequence"><span class="block">Else</span><span class="arrow">→</span><span class="block gold">Yellow: Check</span></div><p class="muted">This is a way to explain the algorithm, not a promise that every editor will use these exact block names.</p></div></div>
+        <div class="section-heading"><p class="eyebrow">If the blocks are available</p><h2>Exact student directions</h2></div>
+        <ol class="card"><li>Create a number variable named <b>clues</b>.</li><li>Set <b>clues</b> to 2 for the sample message.</li><li>Add an <b>if / then / else</b> block.</li><li>Condition: <b>clues is greater than or equal to 2</b>.</li><li>Then: set the Main LED to red and display “PHISH?” if a display block is available.</li><li>Else: set the Main LED to yellow and display “CHECK.”</li><li>Change the number to 0, 1, 2, and 3. Predict the color, run it, and explain the result.</li></ol>
+        <div class="section-heading"><p class="eyebrow">If the blocks are missing</p><h2>No-variable fallback</h2></div>
+        <div class="card blue"><p>Make two short programs instead:</p><div class="block-sequence"><span class="block">Program A</span><span class="arrow">→</span><span class="block" style="border-color:#efa39b;background:#ffe0dc">Red = PHISH?</span></div><div class="block-sequence"><span class="block">Program B</span><span class="arrow">→</span><span class="block gold">Yellow = CHECK</span></div><p>Students manually choose Program A when they count two or more clues and Program B when they count fewer. The thinking is the same; the code is simpler.</p></div>
+        <div class="callout" style="margin-top:20px"><strong>Do not add this to the exit ticket.</strong> The exit ticket checks phishing knowledge and the safe response, so every student can complete it even if this extension is skipped.</div>
+      </div>
+    </section>
+
+    <section id="printables" class="page" role="tabpanel" tabindex="-1">
+      <div class="shell">
+        <p class="eyebrow">Print or display</p><h1>Student cards + exit ticket</h1><p class="lede">All examples are fictional. Do not ask students to type real passwords or open real links.</p>
+        <div class="section-heading"><p class="eyebrow">Message cards</p><h2>Cut these apart</h2></div>
+        <div class="grid-2">
+          <article class="print-card"><span class="tag red">Card A · suspicious</span><h3>Game Rewards</h3><p><b>From:</b> rewards@play-gam3s.example</p><p><b>Subject:</b> You won 5,000 coins!</p><p>Click now in 10 minutes or lose your prize. Send your password to unlock it.</p><div class="fake-link">Unlock my prize</div><button class="btn small secondary" style="margin-top:14px" data-answer="a">Show teacher answer</button><div id="answer-a" class="answer"><b>Answer:</b> Suspicious. Clues: unexpected prize, urgent deadline, password request, odd-looking sender/link.</div></article>
+          <article class="print-card"><span class="tag green">Card B · still check</span><h3>School Club Update</h3><p><b>From:</b> clubadvisor@school.example</p><p><b>Subject:</b> Robotics Club meeting reminder</p><p>Our meeting is Thursday after school. Check the announcement in the school portal or ask the advisor if you have questions.</p><button class="btn small secondary" style="margin-top:14px" data-answer="b">Show teacher answer</button><div id="answer-b" class="answer"><b>Answer:</b> This example does not ask for a password or urgent click. Students should still verify through the school portal or a trusted adult instead of trusting a message blindly.</div></article>
+        </div>
+        <div class="section-heading"><p class="eyebrow">Exit ticket · 5 minutes</p><h2>Students answer independently</h2></div>
+        <div class="card"><p><b>Name:</b> _____________________________________ &nbsp; <b>Date:</b> ______________</p><ol><li><b>In your own words, what is phishing?</b><br><br>________________________________________________________________________________<br><br>________________________________________________________________________________</li><li><b>Name two clues that should make you slow down.</b><br><br>1. ____________________________________ &nbsp; 2. ____________________________________</li><li><b>Name one possible consequence of clicking a phishing link. What should you do instead?</b><br><br>Possible consequence: _____________________________________________________________<br><br>Instead I should: ________________________________________________________________</li></ol></div>
+        <details><summary>Teacher answer key</summary><div><p><b>1.</b> A fake message that tries to trick someone into clicking, sharing information, sending money, or downloading something unsafe.</p><p><b>2.</b> Any two: urgency, unexpected prize, password/personal-data request, odd sender/link, unexpected attachment.</p><p><b>3.</b> Possible consequences include a fake login page, stolen password, account takeover, exposed private information, malware, or money loss. Safe response: Stop, Check through a trusted source, and Tell/report to a trusted adult or approved school process.</p></div></details>
+        <div class="section-heading"><p class="eyebrow">Exit routine</p><h2>End safely</h2></div>
+        <div class="checklist"><div class="check"><input type="checkbox" id="end1"><label for="end1">Stop every BOLT program before reconnecting or putting robots away.</label></div><div class="check"><input type="checkbox" id="end2"><label for="end2">Disconnect robots and return each one to its numbered spot.</label></div><div class="check"><input type="checkbox" id="end3"><label for="end3">Collect exit tickets and remind students: do not click or reply; tell a trusted adult.</label></div></div>
+        <p class="footer-note">Content aligns to the revised 7th-grade lesson flow and the earlier Cyber Defenders presentation theme. For Sphero background, see <a href="https://edu.sphero.com/" target="_blank" rel="noopener">Sphero Edu</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const pages=[...document.querySelectorAll('.page')];
+    const tabs=[...document.querySelectorAll('.tabs button')];
+    function showPage(id){
+      pages.forEach(p=>p.classList.toggle('active',p.id===id));
+      tabs.forEach(t=>t.setAttribute('aria-selected',String(t.dataset.page===id)));
+      document.getElementById(id)?.focus({preventScroll:true});
+      window.scrollTo({top:0,behavior:'smooth'});
+      history.replaceState(null,'','#'+id);
+    }
+    tabs.forEach(t=>t.addEventListener('click',()=>showPage(t.dataset.page)));
+    document.querySelectorAll('[data-page-go]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.pageGo)));
+
+    let seconds=45*60, running=false, timer;
+    const clock=document.getElementById('clockDisplay'), toggle=document.getElementById('clockToggle');
+    function renderClock(){const m=Math.floor(seconds/60),s=seconds%60;clock.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');toggle.textContent=running?'Ⅱ':'▶';}
+    toggle.addEventListener('click',()=>{running=!running;clearInterval(timer);if(running)timer=setInterval(()=>{if(seconds>0){seconds--;renderClock()}else{running=false;clearInterval(timer);renderClock()}},1000);renderClock()});
+    document.getElementById('clockReset').addEventListener('click',()=>{running=false;clearInterval(timer);seconds=45*60;renderClock()});renderClock();
+
+    const slides=[...document.querySelectorAll('.slide')], title=document.getElementById('slideTitle'), counter=document.getElementById('slideCounter'), thumbs=document.getElementById('thumbs');
+    let slide=0;
+    slides.forEach((_,i)=>{const b=document.createElement('button');b.textContent=i+1;b.setAttribute('aria-label','Go to slide '+(i+1));b.addEventListener('click',()=>goSlide(i));thumbs.appendChild(b)});
+    function goSlide(i){slide=(i+slides.length)%slides.length;slides.forEach((s,n)=>s.classList.toggle('active',n===slide));[...thumbs.children].forEach((b,n)=>b.classList.toggle('active',n===slide));counter.textContent=(slide+1)+' / '+slides.length;title.textContent=slides[slide].querySelector('h1,h2')?.textContent||'Student presentation';}
+    function next(){goSlide(slide+1)}function prev(){goSlide(slide-1)}
+    ['nextSlide','stageNext'].forEach(id=>document.getElementById(id).addEventListener('click',next));
+    ['prevSlide','stagePrev'].forEach(id=>document.getElementById(id).addEventListener('click',prev));
+    document.getElementById('fullScreen').addEventListener('click',()=>document.getElementById('stage').requestFullscreen?.());
+    document.addEventListener('keydown',e=>{if(!document.getElementById('present').classList.contains('active'))return;if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev()});goSlide(0);
+
+    document.querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>{const a=document.getElementById('answer-'+b.dataset.answer);a.classList.toggle('show');b.textContent=a.classList.contains('show')?'Hide teacher answer':'Show teacher answer'}));
+    const hash=location.hash.slice(1);if(pages.some(p=>p.id===hash))showPage(hash);
+  </script>
+</body>
+</html>
