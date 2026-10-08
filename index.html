@@ -67,6 +67,7 @@
     .answer{display:none;margin-top:12px;padding:12px;border-radius:10px;background:var(--pale-green);border-left:5px solid var(--green)}.answer.show{display:block}
     .present-shell{width:min(1180px,calc(100% - 34px));margin:auto;padding:30px 0 62px}.present-toolbar{display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:18px}.present-toolbar h2{font-size:30px;margin:0}.slide-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}.slide-controls span{min-width:62px;text-align:center;font-weight:800}.stage{position:relative;min-height:550px;padding:clamp(28px,6vw,74px);border-radius:24px;background:linear-gradient(135deg,#fff 0%,#f5fbff 100%);box-shadow:var(--shadow);overflow:hidden}.stage:after{content:"CYBER DEFENDERS";position:absolute;right:-36px;bottom:36px;transform:rotate(-90deg);color:#d7e8f1;font-weight:900;letter-spacing:.18em}.slide{display:none;position:relative;z-index:1;max-width:880px}.slide.active{display:block}.slide h1{font-size:clamp(38px,7vw,74px)}.slide h2{font-size:clamp(32px,5vw,58px)}.slide .kicker{color:var(--blue);font-weight:900;letter-spacing:.14em;text-transform:uppercase}.slide .big-quote{max-width:830px;padding:24px;border-left:8px solid var(--gold);background:var(--pale-gold);font-size:clamp(24px,4vw,42px);font-weight:800}.slide .slide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.slide .tile{padding:20px;border-radius:14px;background:#fff;border:1px solid var(--line);font-size:18px}.slide .tile strong{display:block;font-size:30px;margin-bottom:5px}.slide .red{color:var(--red)}.slide .green{color:var(--green)}.slide .blue{color:var(--blue)}.slide .gold{color:#9a6b00}.slide-nav{display:flex;justify-content:space-between;margin-top:15px}.thumbs{display:flex;gap:8px;overflow:auto;margin-top:15px}.thumbs button{min-width:38px;height:34px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--navy);font-weight:800}.thumbs button.active{background:var(--cyan);border-color:var(--cyan)}
     .footer-note{margin-top:34px;color:var(--muted);font-size:14px}.footer-note a{font-weight:700}
+    .presenter-note{display:none!important}.cue-tools{margin-top:16px}.cue-panel{padding:18px 22px;border-left:5px solid var(--gold);border-radius:12px;background:var(--pale-gold)}.cue-panel[hidden]{display:none}.cue-panel p:last-child{margin-bottom:0}
     @media(max-width:800px){.topbar{align-items:flex-start;flex-wrap:wrap}.brand{width:100%}.clock{margin-left:auto;margin-top:-46px}.hero,.grid-2,.grid-3{grid-template-columns:1fr}.hero-art{min-height:250px}.chain{grid-template-columns:1fr}.chain div:not(:last-child):after{content:"↓";position:absolute;top:100%;right:50%;margin:3px 0 0;font-size:20px}.response,.slide .slide-grid{grid-template-columns:1fr}.time-row{grid-template-columns:1fr;gap:2px}.present-toolbar{align-items:flex-start;flex-direction:column}.slide-controls{justify-content:flex-start}.stage{min-height:540px;padding:27px}}
     @media print{.topbar,.button-row,.present-toolbar,.slide-nav,.thumbs,.footer-note{display:none!important}.page{display:block!important}.shell,.present-shell{width:100%;padding:0}.card,.hero,.stage{box-shadow:none;break-inside:avoid}.hero-art{display:none}.hero{display:block}.optional{border:2px solid #aaa}.page:not(#guide){display:none!important}body{background:#fff;font-size:12px}h1{font-size:42px}h2{font-size:30px}}
   </style>
@@ -143,13 +144,8 @@
     <section id="present" class="page" role="tabpanel" tabindex="-1">
       <div class="present-shell">
         <div class="present-toolbar">
-          <div><p class="eyebrow">Choose the presenter version</p><h2 id="slideTitle">Pause the Click. Stop the Trick.</h2></div>
+          <div><p class="eyebrow">Guided presentation</p><h2 id="slideTitle">Pause the Click. Stop the Trick.</h2></div>
           <div class="slide-controls"><button class="btn small secondary" id="prevSlide">← Back</button><span id="slideCounter">1 / 16</span><button class="btn small" id="nextSlide">Next →</button><button class="btn small cyan" id="fullScreen">Full screen</button></div>
-        </div>
-        <div class="presenter-switch" role="group" aria-label="Choose presenter version">
-          <button class="btn" data-presenter="guided" aria-pressed="true">My guided version</button>
-          <button class="btn secondary" data-presenter="colleague" aria-pressed="false">Colleague’s concise version</button>
-          <span id="modeDescription" class="muted">More slides, short prompts, and optional presenter cues.</span>
         </div>
         <div class="stage" id="stage" aria-live="polite">
           <!-- Guided presenter version -->
@@ -157,7 +153,7 @@
 
           <article class="slide" data-deck="guided"><p class="kicker">Warm-up · 30 seconds</p><h2>Have you heard of either one?</h2><div class="slide-grid"><div class="tile"><strong class="blue">Phishing</strong>A fake message tries to trick you.</div><div class="tile"><strong class="red">Person-in-the-middle</strong>A third party gets between two sides communicating.</div><div class="tile"><strong class="gold">Quick poll</strong>Hands up: heard of it, maybe, or new to me?</div></div><details class="presenter-note"><summary>Presenter cue</summary><div><p>Ask both terms together. Take two or three quick responses; no personal stories are needed. Then ask for a volunteer for a harmless demo.</p></div></details></article>
 
-          <article class="slide" data-deck="guided"><p class="kicker">A staged demo · 1 minute</p><h2>A reward can make a request feel safe.</h2><p class="big-quote">“For a $20 Federal Reserve note, can I get someone to answer two questions?”</p><p>Colleague: “My name is Alex, and my pretend email is alex@example.test—”</p><p class="lede">“It doesn’t matter what your name is!”</p><details class="presenter-note"><summary>Presenter cue</summary><div><p>Use the prearranged colleague, not a student caught off guard. After the interruption, say that it was intentionally the wrong response. The name and email are made up. Never ask students for real contact details.</p></div></details></article>
+          <article class="slide" data-deck="guided"><h2>A reward can make a request feel safe.</h2></article>
 
           <article class="slide" data-deck="guided"><p class="kicker">Reveal the trick</p><h2>What made the request tempting?</h2><div class="slide-grid"><div class="tile"><strong class="gold">Reward</strong>A $20 prize</div><div class="tile"><strong class="red">Personal info</strong>Name and email</div><div class="tile"><strong class="blue">Pressure</strong>A quick answer, without checking why it was needed</div></div><p class="lede">This is a classroom analogy for phishing and social engineering.</p><details class="presenter-note"><summary>Presenter cue</summary><div><p>“A real phishing message may pretend to be from a game, school, or company. It tries to get you to click or hand over information. Pause and check through a trusted route.”</p></div></details></article>
 
@@ -185,26 +181,9 @@
 
           <article class="slide" data-deck="guided"><p class="kicker">Exit ticket</p><h2>Tell me the difference.</h2><ol><li>What is phishing?</li><li>What does a person-in-the-middle do?</li><li>Give one safe action you can take.</li></ol><p class="tag green">You do not need the optional detection challenge.</p><details class="presenter-note"><summary>Presenter cue</summary><div><p>Collect short independent answers while robots are parked.</p></div></details></article>
 
-          <!-- Concise presenter version for the colleague -->
-          <article class="slide" data-deck="colleague"><p class="kicker">Cyber Defenders · 7th grade</p><h1>Pause the Click.<br>Stop the Trick.</h1><p class="lede">Phishing + Person-in-the-Middle</p><details class="presenter-note"><summary>Quick opening</summary><div><p>“Today we’ll spot a phishing trick, see how a middle person can intercept a conversation, and model it with BOLTs.”</p></div></details></article>
-
-          <article class="slide" data-deck="colleague"><p class="kicker">Start with the staged demo</p><h2>Who has heard of phishing or MITM?</h2><p class="big-quote">“For a $20 Federal Reserve note, can I get someone to answer two questions?”</p><p>Use the prearranged colleague and only pretend contact details.</p><details class="presenter-note"><summary>Quick cue</summary><div><p>Ask for a pretend name/email. Interrupt with “It doesn’t matter what your name is!” Then reveal why the reward/request was a bad idea. Keep the tone light; don't ask students for real information.</p></div></details></article>
-
-          <article class="slide" data-deck="colleague"><p class="kicker">Phishing · 2-minute clip</p><h2>What is the message trying to get?</h2><div class="video-frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/HsUA3tguWZc?rel=0" title="What is phishing? Phishing attacks explained in two minutes" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p>Phishing is the lure: a fake message tries to make someone click or share information.</p></article>
-
-          <article class="slide" data-deck="colleague"><p class="kicker">Keep the terms separate</p><h2>Lure vs. interceptor.</h2><div class="grid-2"><div class="card gold"><h3>Phishing</h3><p>A deceptive message tries to trick you.</p></div><div class="card red"><h3>Person-in-the-middle</h3><p>A third party gets between two sides and may read or change their messages.</p></div></div><p class="muted">They can be connected, but they are not the same attack.</p></article>
-
-          <article class="slide" data-deck="colleague"><p class="kicker">Visual model</p><h2>Normal path → intercepted path</h2><div class="network"><div class="network-node user">Your device</div><span class="network-arrow">→</span><div class="network-node">Router / Wi-Fi</div><span class="network-arrow">→</span><div class="network-node web">Website</div></div><div class="network"><div class="network-node user">Your device</div><span class="network-arrow">→</span><div class="network-node middle">Middle can read/change</div><span class="network-arrow">→</span><div class="network-node web">Website</div></div><p class="network-caption">The third party sits in the communication path.</p></article>
-
-          <article class="slide" data-deck="colleague"><p class="kicker">MITM · about 1 minute</p><h2>Watch the message pass through.</h2><div class="video-frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/ZZNZRITBrvs?rel=0" title="Man-in-the-middle attack one-minute animation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p>Ask: What changed when the middle person appeared?</p></article>
-
-          <article class="slide" data-deck="colleague"><p class="kicker">Robot challenge · 15 minutes</p><h2>Three BOLTs. One intercepted message.</h2><ol><li>Run the normal connection.</li><li>Add the third BOLT between the other two.</li><li>Observe the delay.</li><li>Try the lesson’s message-switching challenge.</li></ol><p class="muted">Follow the official starter program; it contains the exact IR blocks.</p><details class="presenter-note"><summary>Quick cue</summary><div><p>Use lesson 65563. Three BOLTs and devices per group. Start the web-app and middle robots before the user robot.</p></div></details></article>
-
-          <article class="slide" data-deck="colleague"><p class="kicker">Play · 10 minutes</p><h2>Let them explore.</h2><p class="lede">Short driving turns, lights, and a simple path—then stop the programs and collect the exit ticket.</p></article>
-
-          <article class="slide" data-deck="colleague"><p class="kicker">Exit ticket</p><h2>What’s the difference?</h2><ol><li>What is phishing?</li><li>What does a middle person do?</li><li>How can you protect yourself?</li></ol></article>
         </div>
         <div class="slide-nav"><button class="btn secondary" id="stagePrev">← Previous</button><button class="btn" id="stageNext">Next →</button></div>
+        <div class="cue-tools"><button class="btn small secondary" id="cueToggle" aria-expanded="false" aria-controls="presenterCuePanel">Show presenter cue</button><div class="cue-panel" id="presenterCuePanel" hidden><strong>Presenter cue</strong><div id="presenterCueText"></div></div><p class="muted">For projection, use Full screen. It shows only the slide; cues stay outside it.</p></div>
         <div class="thumbs" id="thumbs" aria-label="Choose a presentation slide"></div>
       </div>
     </section>
@@ -244,11 +223,8 @@
         </div>
         <div class="section-heading"><p class="eyebrow">For your preparation only</p><h2>Sphero’s longer demo is not in the timed session.</h2></div>
         <div class="card"><p>Sphero’s lesson links to an 11-minute, 54-second InfoSec demonstration. It can help you prepare, but the in-class plan uses the short animation and the BOLT model so there is time for robot play.</p><p><a href="https://www.youtube.com/watch?v=GkexkyUbUd4" target="_blank" rel="noopener">Open Sphero’s recommended InfoSec man-in-the-middle demonstration</a>.</p></div>
-        <div class="section-heading"><p class="eyebrow">If you are presenting</p><h2>Choose the mode that fits you.</h2></div>
-        <div class="grid-2">
-          <article class="card blue"><h3>My guided version</h3><p>Sixteen short slides, a complete staged-demo script, presenter cues, discussion prompts, and a fallback for each video.</p><button class="btn small" data-page-go="present" data-select-presenter="guided">Open guided version</button></article>
-          <article class="card green"><h3>Colleague’s concise version</h3><p>Nine slides with the same learning goals, but more room for a confident presenter to speak naturally.</p><button class="btn small" data-page-go="present" data-select-presenter="colleague">Open concise version</button></article>
-        </div>
+        <div class="section-heading"><p class="eyebrow">Presenter cues</p><h2>Keep them off the projected slide.</h2></div>
+        <div class="card blue"><p>The cues are hidden inside the slides. Click <b>Show presenter cue</b> below the slide when you want to read one. The <b>Full screen</b> button projects only the slide, so the cue panel stays outside the student view.</p></div>
         <div class="section-heading"><p class="eyebrow">Optional longer extension</p><h2>Skip latency detection in this 45-minute event.</h2></div>
         <div class="callout"><strong>Why:</strong> Sphero’s extra detection challenge uses a number variable and time-elapsed logic and is likely to run beyond the event. The planned learning check does not depend on it.</div>
       </div>
@@ -285,7 +261,6 @@
     }
     tabs.forEach(t=>t.addEventListener('click',()=>showPage(t.dataset.page)));
     document.querySelectorAll('[data-page-go]').forEach(b=>b.addEventListener('click',()=>{
-      if(b.dataset.selectPresenter)setPresenter(b.dataset.selectPresenter);
       showPage(b.dataset.pageGo);
     }));
 
@@ -295,42 +270,38 @@
     toggle.addEventListener('click',()=>{running=!running;clearInterval(timer);if(running)timer=setInterval(()=>{if(seconds>0){seconds--;renderClock()}else{running=false;clearInterval(timer);renderClock()}},1000);renderClock()});
     document.getElementById('clockReset').addEventListener('click',()=>{running=false;clearInterval(timer);seconds=45*60;renderClock()});renderClock();
 
-    const allSlides=[...document.querySelectorAll('.slide')];
+    const slides=[...document.querySelectorAll('.slide')];
     const title=document.getElementById('slideTitle'), counter=document.getElementById('slideCounter'), thumbs=document.getElementById('thumbs');
-    const modeDescription=document.getElementById('modeDescription');
-    const presenterButtons=[...document.querySelectorAll('[data-presenter]')];
-    let selectedPresenter='guided', slides=[], slide=0;
-    function setPresenter(mode){
-      selectedPresenter=mode;
-      slides=allSlides.filter(s=>s.dataset.deck===mode);
-      presenterButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.presenter===mode)));
-      if(modeDescription)modeDescription.textContent=mode==='guided'
-        ?'More slides, short prompts, and optional presenter cues.'
-        :'A shorter slide path with room to speak naturally.';
-      thumbs.innerHTML='';
-      slides.forEach((_,i)=>{
-        const b=document.createElement('button');
-        b.textContent=i+1;
-        b.setAttribute('aria-label','Go to slide '+(i+1));
-        b.addEventListener('click',()=>goSlide(i));
-        thumbs.appendChild(b);
-      });
-      goSlide(0);
-    }
+    const cuePanel=document.getElementById('presenterCuePanel'), cueText=document.getElementById('presenterCueText'), cueToggle=document.getElementById('cueToggle');
+    let slide=0;
     function goSlide(i){
       slide=(i+slides.length)%slides.length;
-      allSlides.forEach(s=>s.classList.toggle('active',slides[slide]===s));
+      slides.forEach(s=>s.classList.toggle('active',slides[slide]===s));
       [...thumbs.children].forEach((b,n)=>b.classList.toggle('active',n===slide));
       counter.textContent=(slide+1)+' / '+slides.length;
       title.textContent=slides[slide].querySelector('h1,h2')?.textContent||'Student presentation';
+      const cue=slides[slide].querySelector('.presenter-note > div');
+      cueText.innerHTML=cue?cue.innerHTML:'<p>No presenter cue for this slide.</p>';
     }
-    presenterButtons.forEach(b=>b.addEventListener('click',()=>setPresenter(b.dataset.presenter)));
+    slides.forEach((_,i)=>{
+      const b=document.createElement('button');
+      b.textContent=i+1;
+      b.setAttribute('aria-label','Go to slide '+(i+1));
+      b.addEventListener('click',()=>goSlide(i));
+      thumbs.appendChild(b);
+    });
+    cueToggle.addEventListener('click',()=>{
+      const show=cuePanel.hidden;
+      cuePanel.hidden=!show;
+      cueToggle.setAttribute('aria-expanded',String(show));
+      cueToggle.textContent=show?'Hide presenter cue':'Show presenter cue';
+    });
     function next(){goSlide(slide+1)}function prev(){goSlide(slide-1)}
     ['nextSlide','stageNext'].forEach(id=>document.getElementById(id).addEventListener('click',next));
     ['prevSlide','stagePrev'].forEach(id=>document.getElementById(id).addEventListener('click',prev));
     document.getElementById('fullScreen').addEventListener('click',()=>document.getElementById('stage').requestFullscreen?.());
     document.addEventListener('keydown',e=>{if(!document.getElementById('present').classList.contains('active'))return;if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev()});
-    setPresenter('guided');
+    goSlide(0);
 
     document.querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>{
       const a=document.getElementById('answer-'+b.dataset.answer);
