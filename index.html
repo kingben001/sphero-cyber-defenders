@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cyber Defenders | Phishing + Sphero BOLT</title>
+  <title>Cyber Defenders | Phishing + Person-in-the-Middle with Sphero BOLT</title>
   <style>
     :root {
       --navy:#102a43; --blue:#1769aa; --cyan:#73d2f6; --gold:#f0b429;
@@ -73,12 +73,12 @@
 </head>
 <body>
   <header class="topbar">
-    <div class="brand"><span class="orb" aria-hidden="true"></span><span><small>CYBER DEFENDERS</small>Phishing + Sphero BOLT</span></div>
+    <div class="brand"><span class="orb" aria-hidden="true"></span><span><small>CYBER DEFENDERS</small>Phishing + Person-in-the-Middle</span></div>
     <nav class="tabs" aria-label="Lesson sections">
       <button data-page="guide" aria-selected="true">Run of show</button>
-      <button data-page="present" aria-selected="false">Present to students</button>
-      <button data-page="activity" aria-selected="false">Exercise 3</button>
-      <button data-page="extension" aria-selected="false">Optional 4</button>
+      <button data-page="present" aria-selected="false">Presentation</button>
+      <button data-page="activity" aria-selected="false">Robot activity</button>
+      <button data-page="extension" aria-selected="false">Facilitator prep</button>
       <button data-page="printables" aria-selected="false">Printables</button>
     </nav>
     <div class="clock"><button id="clockToggle" title="Start or pause timer">▶</button><span id="clockDisplay">45:00</span><button id="clockReset" title="Reset timer">↺</button></div>
@@ -89,63 +89,120 @@
       <div class="shell">
         <section class="hero">
           <div class="hero-copy">
-            <p class="eyebrow">7th-grade mini-lesson + robot challenge</p>
-            <h1>Pause the Click.</h1>
-            <p class="lede">Learn how phishing tricks people, then program a Sphero BOLT to model the safe response: Stop, Check, Tell.</p>
-            <div class="button-row"><button class="btn cyan" data-page-go="present">Start student presentation</button><button class="btn secondary" data-page-go="activity">Jump to Exercise 3</button></div>
+            <p class="eyebrow">7th-grade cyber lesson + BOLT activity</p>
+            <h1>Pause the Click.<br>Stop the Trick.</h1>
+            <p class="lede">Start with phishing, show how a person-in-the-middle can intercept a conversation, then let students model it with Sphero BOLTs.</p>
+            <div class="button-row"><button class="btn cyan" data-page-go="present">Start presentation</button><button class="btn secondary" data-page-go="activity">Set up robot activity</button></div>
           </div>
           <div class="hero-art" aria-label="Illustration of a Sphero BOLT robot"><div class="robot"></div></div>
         </section>
 
-        <div class="section-heading"><p class="eyebrow">The goal</p><h2>Students should leave knowing three things.</h2></div>
+        <div class="section-heading"><p class="eyebrow">Learning goals</p><h2>Three ideas to take away.</h2></div>
         <div class="grid-3">
-          <article class="card blue"><span class="tag">1 · Identify</span><h3>What phishing is</h3><p>A fake message designed to trick someone into clicking, sharing information, sending money, or downloading something unsafe.</p></article>
-          <article class="card gold"><span class="tag gold">2 · Predict</span><h3>What a click can cause</h3><p>A fake login page, stolen password, account takeover, exposed private information, malware, or money loss.</p></article>
-          <article class="card green"><span class="tag green">3 · Respond</span><h3>What to do next</h3><p>Stop. Check through a trusted source. Tell a trusted adult or use the approved reporting process.</p></article>
+          <article class="card blue"><span class="tag">1 · Spot it</span><h3>Phishing is a trick</h3><p>A fake message tries to get someone to click, share information, or take an unsafe action.</p></article>
+          <article class="card gold"><span class="tag gold">2 · See it</span><h3>A middle person intercepts</h3><p>A person-in-the-middle gets between two devices or people communicating and may read or change the messages.</p></article>
+          <article class="card green"><span class="tag green">3 · Protect it</span><h3>Pause and verify</h3><p>Use trusted apps and networks, avoid sharing private information in response to unexpected requests, and ask a trusted adult or IT staff for help.</p></article>
         </div>
 
-        <div class="section-heading"><p class="eyebrow">45-minute plan</p><h2>Run of show</h2><p>If time gets short, skip Optional Exercise 4. Never skip the explanation, Exercise 3 debrief, or the exit ticket.</p></div>
+        <div class="section-heading"><p class="eyebrow">43-minute plan + 2-minute buffer</p><h2>Run of show</h2><p>This leaves a real 10-minute block for students to explore the robots after the structured activity.</p></div>
         <div class="timeline">
-          <div class="time-row"><strong>0–4 min</strong><span><b>Welcome + quick question:</b> “Has anyone heard the word phishing?” Take a few responses without requiring anyone to share a personal experience.</span></div>
-          <div class="time-row"><strong>4–9 min</strong><span><b>Teach the idea:</b> Define phishing in student-friendly language. Ask students to repeat “fake message, real goal.”</span></div>
-          <div class="time-row"><strong>9–14 min</strong><span><b>Show an example:</b> Let students find the clues before you reveal them. Discuss what could happen after a click.</span></div>
-          <div class="time-row"><strong>14–18 min</strong><span><b>Model the response:</b> Practice Stop, Check, Tell with hand motions.</span></div>
-          <div class="time-row"><strong>18–32 min</strong><span><b>Required Exercise 3:</b> Program the BOLT as a Stop–Check–Tell alert and test it with two fictional messages.</span></div>
-          <div class="time-row"><strong>32–40 min</strong><span><b>Optional Exercise 4:</b> Code the Phishing Detector only if every team is ready.</span></div>
-          <div class="time-row"><strong>40–45 min</strong><span><b>Exit ticket + close:</b> Students answer the phishing questions independently. Exercise 4 is not required.</span></div>
+          <div class="time-row"><strong>0–3 min</strong><span><b>Hook + staged colleague demo:</b> Ask who has heard of phishing or a person-in-the-middle. Use the prearranged colleague for the reward-and-pretend-email demonstration.</span></div>
+          <div class="time-row"><strong>3–5 min</strong><span><b>Short video 1:</b> Show the two-minute phishing explainer. Students listen for the trick and the goal.</span></div>
+          <div class="time-row"><strong>5–9 min</strong><span><b>Phishing example:</b> Find the warning signs together and name what a click could expose.</span></div>
+          <div class="time-row"><strong>9–12 min</strong><span><b>Explain person-in-the-middle:</b> Use the visual route diagram and one-minute animation. Say clearly how it differs from phishing.</span></div>
+          <div class="time-row"><strong>12–27 min</strong><span><b>Sphero activity:</b> Run the original connection, insert the third BOLT, and try the message-switching challenge with the official starter program.</span></div>
+          <div class="time-row"><strong>27–37 min</strong><span><b>Robot play time:</b> Open driving or a simple color-and-movement challenge. Rotate the device driver once.</span></div>
+          <div class="time-row"><strong>37–43 min</strong><span><b>Exit ticket + close:</b> Students explain phishing, person-in-the-middle, one difference, and one safe action.</span></div>
+          <div class="time-row"><strong>43–45 min</strong><span><b>Buffer:</b> Use for a late robot connection or a quick final question.</span></div>
         </div>
 
-        <div class="section-heading"><p class="eyebrow">Before students arrive</p><h2>Quick setup checklist</h2></div>
+        <div class="section-heading"><p class="eyebrow">Your opening demonstration</p><h2>Keep it playful and use pretend details.</h2></div>
+        <div class="script">
+          <p><b>You:</b> “Has anyone heard of phishing or a man-in-the-middle attack? Any volunteers for a quick demo?”</p>
+          <p><b>If no students volunteer, use your colleague, who has agreed to play along:</b> “There are eight people in here and I only got one volunteer? I know it’s early, but I need more than that. For a $20 Federal Reserve note, can I get someone to answer two questions?”</p>
+          <p><b>You:</b> “Young man in the back with the orange glasses—come on up. What should I call you for this demo, and what is your email address?”</p>
+          <p><b>Colleague:</b> “You can call me Alex, and my pretend email is alex@example.test—”</p>
+          <p><b>You, interrupting:</b> “It doesn’t matter what your name is!” Then pause and reveal: “That was the wrong move. I used a reward to make a personal-information request feel okay, and I interrupted instead of checking what was actually needed. We used pretend details; no one should share a real email for a prize.”</p>
+        </div>
+        <div class="callout" style="margin-top:18px"><strong>Bridge to the lesson:</strong> This skit is a phishing/social-engineering-style trick. A person-in-the-middle attack is different: someone secretly gets between two communicating sides to read or change their messages. Phishing can sometimes help an attacker gain access, but the two terms do not mean the same thing.</div>
+
+        <div class="section-heading"><p class="eyebrow">Before students arrive</p><h2>Prepare the tech so the 45-minute plan works.</h2></div>
         <div class="grid-2">
           <div class="card"><div class="checklist">
-            <div class="check"><input type="checkbox" id="c1"><label for="c1">Charge each BOLT and device; connect one robot per team.</label></div>
-            <div class="check"><input type="checkbox" id="c2"><label for="c2">Open Sphero Edu and choose Block Coding.</label></div>
-            <div class="check"><input type="checkbox" id="c3"><label for="c3">Place robots on a desk or parking mat. Movement is not needed for the required activity.</label></div>
-            <div class="check"><input type="checkbox" id="c4"><label for="c4">Print or display the two fictional message cards in Printables.</label></div>
-            <div class="check"><input type="checkbox" id="c5"><label for="c5">Write STOP, CHECK, and TELL where everyone can see them.</label></div>
+            <div class="check"><input type="checkbox" id="c1"><label for="c1">Charge and label the BOLTs and programming devices.</label></div>
+            <div class="check"><input type="checkbox" id="c2"><label for="c2">Open Sphero lesson 65563 and its linked starter program on each device.</label></div>
+            <div class="check"><input type="checkbox" id="c3"><label for="c3">Test the IR program and the three-robot role setup before the event.</label></div>
+            <div class="check"><input type="checkbox" id="c4"><label for="c4">Preview the two video clips on the classroom network; keep the visual diagrams ready as a fallback.</label></div>
+            <div class="check"><input type="checkbox" id="c5"><label for="c5">Set aside a clear play area and print the fake message and exit ticket.</label></div>
           </div></div>
-          <div class="card callout"><strong>Important BOLT note</strong><p>The old manual used names such as custom functions, variables, and risk scores. Those were teaching ideas—not guaranteed button names in Sphero Edu. This version makes Exercise 3 with basic blocks you are most likely to see: Start, Set Main LED, Wait/Delay, and Stop.</p><p>If your editor uses a slightly different label, use the closest block. The learning goal is the sequence, not a particular word on the screen.</p></div>
+          <div class="card callout"><strong>Equipment and timing</strong><p>Sphero’s lesson is “Person-in-the-Middle Attacks: Who’s There?” (code 65563). It is listed for grades 5–9, uses three BOLTs and three programming devices per group, and expects familiarity with IR communication and events. Its full version can take up to an hour, so this event uses selected steps and the starter program.</p><p>For eight students, make two groups of four; each group can assign three robot roles and one observer/timekeeper. If your earlier set of 30 BOLT+ robots is available, the lesson needs only six for these two groups before open play.</p></div>
         </div>
       </div>
     </section>
 
     <section id="present" class="page" role="tabpanel" tabindex="-1">
       <div class="present-shell">
-        <div class="present-toolbar"><div><p class="eyebrow">Project this section</p><h2 id="slideTitle">Pause the Click</h2></div><div class="slide-controls"><button class="btn small secondary" id="prevSlide">← Back</button><span id="slideCounter">1 / 13</span><button class="btn small" id="nextSlide">Next →</button><button class="btn small cyan" id="fullScreen">Full screen</button></div></div>
+        <div class="present-toolbar">
+          <div><p class="eyebrow">Choose the presenter version</p><h2 id="slideTitle">Pause the Click. Stop the Trick.</h2></div>
+          <div class="slide-controls"><button class="btn small secondary" id="prevSlide">← Back</button><span id="slideCounter">1 / 16</span><button class="btn small" id="nextSlide">Next →</button><button class="btn small cyan" id="fullScreen">Full screen</button></div>
+        </div>
+        <div class="presenter-switch" role="group" aria-label="Choose presenter version">
+          <button class="btn" data-presenter="guided" aria-pressed="true">My guided version</button>
+          <button class="btn secondary" data-presenter="colleague" aria-pressed="false">Colleague’s concise version</button>
+          <span id="modeDescription" class="muted">More slides, short prompts, and optional presenter cues.</span>
+        </div>
         <div class="stage" id="stage" aria-live="polite">
-          <article class="slide active"><p class="kicker">Cyber Defenders · 7th grade</p><h1>Pause the Click.</h1><p class="lede">Learn the trick. Predict the consequence. Program the safe response.</p><div class="button-row"><span class="tag">Today’s mission</span></div></article>
-          <article class="slide"><p class="kicker">Warm-up</p><h2>Has anyone heard of phishing?</h2><p class="big-quote">You can answer yes, no, or “I’m not sure.”</p><p>Phishing is something we can learn to spot. No one has to share a personal story.</p></article>
-          <article class="slide"><p class="kicker">What is phishing?</p><h2>A fake message with a real goal.</h2><p class="lede">Phishing is when someone pretends to be trustworthy to trick you into clicking, sharing information, sending money, or downloading something unsafe.</p><div class="slide-grid"><div class="tile"><strong class="blue">Fake</strong>It may look like a school, game, friend, or company.</div><div class="tile"><strong class="gold">Tricky</strong>It creates urgency, excitement, or fear.</div><div class="tile"><strong class="red">Goal</strong>It wants information or an unsafe action.</div></div></article>
-          <article class="slide"><p class="kicker">Look at the evidence</p><h2>Which clues do you see?</h2><div class="message"><b>From:</b> Game Rewards &lt;rewards@play-gam3s.example&gt;<br><b>Subject:</b> You won 5,000 coins!<p>Click now in 10 minutes or lose your prize. Send your password to unlock it.</p><span class="fake-link">Unlock my prize</span></div><p>Turn and talk: What feels unusual? Find at least two clues.</p></article>
-          <article class="slide"><p class="kicker">Possible clues</p><h2>Slow down when you see…</h2><div class="slide-grid"><div class="tile"><strong class="red">Urgency</strong>“Do it now!”</div><div class="tile"><strong class="gold">Prize</strong>An unexpected reward</div><div class="tile"><strong class="red">Private info</strong>A password request</div></div><p class="lede">One clue is not always proof. Gather evidence and verify through a trusted method.</p></article>
-          <article class="slide"><p class="kicker">What can happen?</p><h2>A click can open a chain of risk.</h2><div class="chain"><div>Click</div><div>Fake login page</div><div>Password stolen</div><div>Account takeover</div><div>Private info or malware</div></div><p class="muted">These are possible consequences—not a promise that every click causes all of them.</p></article>
-          <article class="slide"><p class="kicker">Your safe response</p><h2>Stop · Check · Tell</h2><div class="response"><div class="step"><strong>STOP</strong>Do not click, reply, download, or scan while rushed.</div><div class="step"><strong>CHECK</strong>Who sent it? What does it ask? Did you expect it?</div><div class="step"><strong>TELL</strong>Show a trusted adult or use the approved report button.</div></div></article>
-          <article class="slide"><p class="kicker">Meet your BOLT</p><h2>The robot will act like an alert.</h2><p class="lede">For today’s required activity, keep it parked. We will use simple color blocks to show the response sequence.</p><div class="block-sequence"><span class="block blue">Set Main LED: blue</span><span class="arrow">→</span><span class="block gold">Set Main LED: yellow</span><span class="arrow">→</span><span class="block green">Set Main LED: green</span></div><p>Blue = Stop · Yellow = Check · Green = Tell</p></article>
-          <article class="slide"><p class="kicker">Required Exercise 3</p><h2>Build the Stop–Check–Tell alert.</h2><ol><li>Open Block Coding.</li><li>Build the three-color sequence.</li><li>Run it once.</li><li>Use a partner’s message card and name two clues.</li><li>Run it again while saying the safe response.</li></ol></article>
-          <article class="slide"><p class="kicker">Test your thinking</p><h2>Predict → Run → Explain</h2><p class="big-quote">What does the robot know? What does a human still need to decide?</p><p>The BOLT can show a programmed alert. It cannot know whether a message is truly safe. People use context and evidence.</p></article>
-          <article class="slide"><p class="kicker">Optional if time</p><h2>Code the Phishing Detector.</h2><p class="lede">If a team is ready, use an if/then/else rule: two or more warning clues → red alert; fewer clues → yellow “check.”</p><p class="muted">This is an extension. It is not needed for the exit ticket.</p></article>
-          <article class="slide"><p class="kicker">Exit ticket</p><h2>Show what you learned.</h2><ol><li>What is phishing?</li><li>Name two clues that should make you slow down.</li><li>Name one possible consequence of clicking, and what you should do instead.</li></ol><p class="tag green">You do not need Optional Exercise 4.</p></article>
-          <article class="slide"><p class="kicker">Close</p><h1>STOP. CHECK. TELL.</h1><p class="lede">You are a cyber defender.</p></article>
+          <!-- Guided presenter version -->
+          <article class="slide" data-deck="guided"><p class="kicker">Cyber Defenders · 7th grade</p><h1>Pause the Click.<br>Stop the Trick.</h1><p class="lede">Phishing + Person-in-the-Middle</p><div class="button-row"><span class="tag">Today’s mission</span></div><details class="presenter-note"><summary>Presenter cue</summary><div><p>“We’ll start with a trick, see how messages can be intercepted, and then model it with BOLTs.”</p></div></details></article>
+
+          <article class="slide" data-deck="guided"><p class="kicker">Warm-up · 30 seconds</p><h2>Have you heard of either one?</h2><div class="slide-grid"><div class="tile"><strong class="blue">Phishing</strong>A fake message tries to trick you.</div><div class="tile"><strong class="red">Person-in-the-middle</strong>A third party gets between two sides communicating.</div><div class="tile"><strong class="gold">Quick poll</strong>Hands up: heard of it, maybe, or new to me?</div></div><details class="presenter-note"><summary>Presenter cue</summary><div><p>Ask both terms together. Take two or three quick responses; no personal stories are needed. Then ask for a volunteer for a harmless demo.</p></div></details></article>
+
+          <article class="slide" data-deck="guided"><p class="kicker">A staged demo · 1 minute</p><h2>A reward can make a request feel safe.</h2><p class="big-quote">“For a $20 Federal Reserve note, can I get someone to answer two questions?”</p><p>Colleague: “My name is Alex, and my pretend email is alex@example.test—”</p><p class="lede">“It doesn’t matter what your name is!”</p><details class="presenter-note"><summary>Presenter cue</summary><div><p>Use the prearranged colleague, not a student caught off guard. After the interruption, say that it was intentionally the wrong response. The name and email are made up. Never ask students for real contact details.</p></div></details></article>
+
+          <article class="slide" data-deck="guided"><p class="kicker">Reveal the trick</p><h2>What made the request tempting?</h2><div class="slide-grid"><div class="tile"><strong class="gold">Reward</strong>A $20 prize</div><div class="tile"><strong class="red">Personal info</strong>Name and email</div><div class="tile"><strong class="blue">Pressure</strong>A quick answer, without checking why it was needed</div></div><p class="lede">This is a classroom analogy for phishing and social engineering.</p><details class="presenter-note"><summary>Presenter cue</summary><div><p>“A real phishing message may pretend to be from a game, school, or company. It tries to get you to click or hand over information. Pause and check through a trusted route.”</p></div></details></article>
+
+          <article class="slide" data-deck="guided"><p class="kicker">What is phishing?</p><h2>A fake message with a real goal.</h2><p class="lede">Phishing uses a deceptive message to trick someone into clicking a link, opening a file, or sharing information.</p><div class="slide-grid"><div class="tile"><strong class="red">Urgency</strong>“Do it now!”</div><div class="tile"><strong class="gold">Reward or worry</strong>A prize, warning, or threat</div><div class="tile"><strong class="blue">Unexpected request</strong>A password, login, or personal detail</div></div><details class="presenter-note"><summary>Presenter cue</summary><div><p>Keep it to one sentence: “Phishing is a fake message that tries to get a real response from you.”</p></div></details></article>
+
+          <article class="slide" data-deck="guided"><p class="kicker">Video · 2 minutes</p><h2>Watch for the hook.</h2><span class="video-label">Phishing explained in 2 minutes · Cybernews</span><div class="video-frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/HsUA3tguWZc?rel=0" title="What is phishing? Phishing attacks explained in two minutes" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p>Listen for: What does the message want the person to do?</p><details class="presenter-note"><summary>Presenter cue</summary><div><p>If video is blocked, skip it and use the example on the next slide. The presentation still works with the built-in visuals.</p></div></details></article>
+
+          <article class="slide" data-deck="guided"><p class="kicker">Look at the evidence</p><h2>Would you click?</h2><div class="message"><b>From:</b> School Account Help &lt;helpdesk@school-login.example.test&gt;<br><b>Subject:</b> Your account closes in 10 minutes<p>Your account will be locked. Use the button below to keep access.</p><span class="fake-link">[FAKE LINK · DO NOT CLICK]</span></div><p>Find two clues. What could happen if someone entered a password?</p><details class="presenter-note"><summary>Presenter cue</summary><div><p>Expected clues: urgent deadline, unfamiliar sender/domain, unexpected sign-in request. Explain possible outcomes calmly: credentials could be stolen, the account could be taken over, or private files/messages could be exposed. This is fictional and has no working link.</p></div></details></article>
+
+          <article class="slide" data-deck="guided"><p class="kicker">Two related ideas</p><h2>Phishing and MITM are different.</h2><div class="grid-2"><div class="card gold"><span class="tag gold">Phishing</span><h3>The lure</h3><p>A deceptive message tries to trick a person into clicking or sharing information.</p></div><div class="card red"><span class="tag red">Person-in-the-middle</span><h3>The interceptor</h3><p>A third party gets between two sides communicating and may read or change messages.</p></div></div><p class="muted">A phish can sometimes help an attacker gain access, but phishing is not the same attack as MITM.</p><details class="presenter-note"><summary>Presenter cue</summary><div><p>Use “lure versus interceptor.” That short contrast keeps the concepts separate.</p></div></details></article>
+
+          <article class="slide" data-deck="guided"><p class="kicker">Normal connection</p><h2>Messages travel between two sides.</h2><div class="network"><div class="network-node user">Your device<br>“Send request”</div><span class="network-arrow">→</span><div class="network-node">Router / Wi-Fi</div><span class="network-arrow">→</span><div class="network-node web">Website<br>“Reply”</div></div><p class="network-caption">The router passes messages along as expected.</p><details class="presenter-note"><summary>Presenter cue</summary><div><p>Point left to right and back: “Your device sends a request through the router; the website’s reply comes back.”</p></div></details></article>
+
+          <article class="slide" data-deck="guided"><p class="kicker">Person-in-the-middle</p><h2>A third party is in the path.</h2><div class="network"><div class="network-node user">Your device</div><span class="network-arrow">→</span><div class="network-node middle">Interceptor<br>reads or changes</div><span class="network-arrow">→</span><div class="network-node web">Website</div></div><p class="network-caption">Both sides may think they are communicating directly.</p><details class="presenter-note"><summary>Presenter cue</summary><div><p>“A real attacker may exploit an unsafe or compromised connection. Our diagram and robots only model the idea; they do not attack a real network.”</p></div></details></article>
+
+          <article class="slide" data-deck="guided"><p class="kicker">Video · about 1 minute</p><h2>See the middle person.</h2><span class="video-label">Man-in-the-middle attack animation</span><div class="video-frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/ZZNZRITBrvs?rel=0" title="Man-in-the-middle attack one-minute animation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p>Afterward ask: What did the middle person do?</p><details class="presenter-note"><summary>Presenter cue</summary><div><p>Preview this clip first. If it is unavailable or unclear, skip it and point to the diagram instead.</p></div></details></article>
+
+          <article class="slide" data-deck="guided"><p class="kicker">Robot roles</p><h2>Three BOLTs make the network visible.</h2><div class="response"><div class="step"><strong>1</strong>User / victim BOLT</div><div class="step"><strong>2</strong>Website / app BOLT</div><div class="step"><strong>3</strong>Middle / interceptor BOLT</div></div><p>Start with two robots communicating normally. Then put the third robot between them.</p><details class="presenter-note"><summary>Presenter cue</summary><div><p>Open Sphero lesson 65563 and its linked starter program. Use its images for the exact IR setup and code.</p></div></details></article>
+
+          <article class="slide" data-deck="guided"><p class="kicker">Main robot challenge</p><h2>Watch, intercept, change.</h2><ol><li>Run the normal connection.</li><li>Place a book between the user and website BOLTs.</li><li>Place the third BOLT where it can see both.</li><li>Run the lesson’s interceptor program and observe the delay.</li><li>If ready, switch the message channels as the official lesson directs.</li></ol><details class="presenter-note"><summary>Presenter cue</summary><div><p>Have the web-app and middle BOLTs start first, then start the user BOLT. Follow the official lesson’s starter-program comments; do not improvise new blocks.</p></div></details></article>
+
+          <article class="slide" data-deck="guided"><p class="kicker">What helps?</p><h2>Pause, verify, protect.</h2><div class="slide-grid"><div class="tile"><strong class="blue">Phishing</strong>Open a known app or type the trusted address yourself.</div><div class="tile"><strong class="green">Connections</strong>Use trusted networks and secure sites; be careful on open public Wi-Fi.</div><div class="tile"><strong class="gold">If unsure</strong>Don’t enter details. Ask a trusted adult or IT staff.</div></div><details class="presenter-note"><summary>Presenter cue</summary><div><p>Do not tell students that HTTPS alone guarantees safety. It protects a connection, but students should still check the site and use a trusted route.</p></div></details></article>
+
+          <article class="slide" data-deck="guided"><p class="kicker">10 minutes · robot play</p><h2>Now explore safely.</h2><p class="lede">Drive on the marked area, test lights and movement, and take turns controlling a robot.</p><div class="block-sequence"><span class="block blue">Pick a color</span><span class="arrow">→</span><span class="block">Roll a short path</span><span class="arrow">→</span><span class="block green">Share what you programmed</span></div><details class="presenter-note"><summary>Presenter cue</summary><div><p>Keep speeds low, use the marked play zone, and stop every program before switching devices.</p></div></details></article>
+
+          <article class="slide" data-deck="guided"><p class="kicker">Exit ticket</p><h2>Tell me the difference.</h2><ol><li>What is phishing?</li><li>What does a person-in-the-middle do?</li><li>Give one safe action you can take.</li></ol><p class="tag green">You do not need the optional detection challenge.</p><details class="presenter-note"><summary>Presenter cue</summary><div><p>Collect short independent answers while robots are parked.</p></div></details></article>
+
+          <!-- Concise presenter version for the colleague -->
+          <article class="slide" data-deck="colleague"><p class="kicker">Cyber Defenders · 7th grade</p><h1>Pause the Click.<br>Stop the Trick.</h1><p class="lede">Phishing + Person-in-the-Middle</p><details class="presenter-note"><summary>Quick opening</summary><div><p>“Today we’ll spot a phishing trick, see how a middle person can intercept a conversation, and model it with BOLTs.”</p></div></details></article>
+
+          <article class="slide" data-deck="colleague"><p class="kicker">Start with the staged demo</p><h2>Who has heard of phishing or MITM?</h2><p class="big-quote">“For a $20 Federal Reserve note, can I get someone to answer two questions?”</p><p>Use the prearranged colleague and only pretend contact details.</p><details class="presenter-note"><summary>Quick cue</summary><div><p>Ask for a pretend name/email. Interrupt with “It doesn’t matter what your name is!” Then reveal why the reward/request was a bad idea. Keep the tone light; don't ask students for real information.</p></div></details></article>
+
+          <article class="slide" data-deck="colleague"><p class="kicker">Phishing · 2-minute clip</p><h2>What is the message trying to get?</h2><div class="video-frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/HsUA3tguWZc?rel=0" title="What is phishing? Phishing attacks explained in two minutes" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p>Phishing is the lure: a fake message tries to make someone click or share information.</p></article>
+
+          <article class="slide" data-deck="colleague"><p class="kicker">Keep the terms separate</p><h2>Lure vs. interceptor.</h2><div class="grid-2"><div class="card gold"><h3>Phishing</h3><p>A deceptive message tries to trick you.</p></div><div class="card red"><h3>Person-in-the-middle</h3><p>A third party gets between two sides and may read or change their messages.</p></div></div><p class="muted">They can be connected, but they are not the same attack.</p></article>
+
+          <article class="slide" data-deck="colleague"><p class="kicker">Visual model</p><h2>Normal path → intercepted path</h2><div class="network"><div class="network-node user">Your device</div><span class="network-arrow">→</span><div class="network-node">Router / Wi-Fi</div><span class="network-arrow">→</span><div class="network-node web">Website</div></div><div class="network"><div class="network-node user">Your device</div><span class="network-arrow">→</span><div class="network-node middle">Middle can read/change</div><span class="network-arrow">→</span><div class="network-node web">Website</div></div><p class="network-caption">The third party sits in the communication path.</p></article>
+
+          <article class="slide" data-deck="colleague"><p class="kicker">MITM · about 1 minute</p><h2>Watch the message pass through.</h2><div class="video-frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/ZZNZRITBrvs?rel=0" title="Man-in-the-middle attack one-minute animation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p>Ask: What changed when the middle person appeared?</p></article>
+
+          <article class="slide" data-deck="colleague"><p class="kicker">Robot challenge · 15 minutes</p><h2>Three BOLTs. One intercepted message.</h2><ol><li>Run the normal connection.</li><li>Add the third BOLT between the other two.</li><li>Observe the delay.</li><li>Try the lesson’s message-switching challenge.</li></ol><p class="muted">Follow the official starter program; it contains the exact IR blocks.</p><details class="presenter-note"><summary>Quick cue</summary><div><p>Use lesson 65563. Three BOLTs and devices per group. Start the web-app and middle robots before the user robot.</p></div></details></article>
+
+          <article class="slide" data-deck="colleague"><p class="kicker">Play · 10 minutes</p><h2>Let them explore.</h2><p class="lede">Short driving turns, lights, and a simple path—then stop the programs and collect the exit ticket.</p></article>
+
+          <article class="slide" data-deck="colleague"><p class="kicker">Exit ticket</p><h2>What’s the difference?</h2><ol><li>What is phishing?</li><li>What does a middle person do?</li><li>How can you protect yourself?</li></ol></article>
         </div>
         <div class="slide-nav"><button class="btn secondary" id="stagePrev">← Previous</button><button class="btn" id="stageNext">Next →</button></div>
         <div class="thumbs" id="thumbs" aria-label="Choose a presentation slide"></div>
@@ -154,60 +211,64 @@
 
     <section id="activity" class="page" role="tabpanel" tabindex="-1">
       <div class="shell">
-        <p class="eyebrow">Required robot activity · 14 minutes</p><h1>Exercise 3: Stop, Verify, Report</h1>
-        <p class="lede">This is the main BOLT activity. It is intentionally simple enough to build in Sphero Edu without custom functions or a complicated detector.</p>
-        <div class="notice"><strong>Use the language students will remember:</strong><span>Stop = pause your hands. Check = look for evidence. Tell = report to a trusted adult or approved system.</span></div>
-        <div class="section-heading"><p class="eyebrow">Materials</p><h2>One team needs</h2></div>
-        <div class="grid-3"><div class="card"><h3>Robot</h3><p>One charged BOLT and one device with Sphero Edu.</p></div><div class="card"><h3>Cards</h3><p>Two fictional message cards from Printables. Never use real accounts, passwords, or student information.</p></div><div class="card"><h3>Workspace</h3><p>A desk or parking mat. Rolling is not required; color is the signal.</p></div></div>
-        <div class="section-heading"><p class="eyebrow">Facilitator model</p><h2>Say this first</h2></div>
-        <div class="script"><p>“Your BOLT is going to be a cyber-alert robot. It is not deciding whether a message is safe. It is reminding us to use the safe sequence: Stop, Check, Tell.”</p><p>“The colors are our memory tool: blue means Stop, yellow means Check, and green means Tell.”</p></div>
-        <div class="section-heading"><p class="eyebrow">Build it</p><h2>Basic block sequence</h2><p>Block names can vary slightly by app version. Look for the closest visible block.</p></div>
-        <div class="card">
-          <div class="block-sequence"><span class="block">When Program Starts</span><span class="arrow">→</span><span class="block blue">Set Main LED to Blue</span><span class="arrow">→</span><span class="block">Wait / Delay 2 sec</span><span class="arrow">→</span><span class="block gold">Set Main LED to Yellow</span><span class="arrow">→</span><span class="block">Wait / Delay 2 sec</span><span class="arrow">→</span><span class="block green">Set Main LED to Green</span><span class="arrow">→</span><span class="block">Stop / End</span></div>
-          <p><b>If you cannot find a text-display block:</b> skip it. The colored LEDs are enough. Put the words STOP, CHECK, and TELL on paper where students can see them.</p>
-          <p><b>If you cannot find Wait/Delay:</b> place the three color blocks in order and have the partner say each word as the color changes.</p>
-        </div>
-        <div class="section-heading"><p class="eyebrow">Run the activity</p><h2>Exact instructions</h2></div>
+        <p class="eyebrow">Main robot activity · 15 minutes</p><h1>Person-in-the-Middle with BOLT</h1>
+        <p class="lede">Use Sphero’s official lesson and linked starter program. This short event version focuses on the normal connection, interception, and message-switching steps.</p>
+        <div class="notice"><strong>Open Sphero lesson 65563:</strong><span><a href="https://edu.sphero.com/cwists/preview/65563" target="_blank" rel="noopener">Person-in-the-Middle Attacks: Who’s There?</a> The lesson is for grades 5–9, compatible with BOLT/BOLT+, and asks for three robots and three programming devices per group.</span></div>
+        <div class="section-heading"><p class="eyebrow">Materials and roles</p><h2>Plan each team before class.</h2></div>
         <div class="grid-2">
-          <article class="card blue"><span class="tag">Step 1 · 2 min</span><h3>Assign roles</h3><ul><li><b>Coder:</b> places the blocks.</li><li><b>Reader:</b> reads the fictional message.</li><li><b>Checker:</b> listens for two clues and watches the BOLT.</li><li>If there are fewer than three students, combine Checker with Reader.</li></ul></article>
-          <article class="card blue"><span class="tag">Step 2 · 3 min</span><h3>Build and run</h3><ol><li>Build the sequence above.</li><li>Run it once without a message.</li><li>Ask: “What does each color mean?”</li><li>Fix the order if the colors do not match the words.</li></ol></article>
-          <article class="card gold"><span class="tag gold">Step 3 · 4 min</span><h3>Round 1: spot the clues</h3><ol><li>Reader shows Card A.</li><li>Everyone silently finds clues.</li><li>Reader says two clues aloud.</li><li>Run the BOLT and say Stop, Check, Tell with it.</li></ol></article>
-          <article class="card green"><span class="tag green">Step 4 · 4 min</span><h3>Round 2: change roles</h3><ol><li>Swap roles and use Card B.</li><li>Before touching the robot, answer: “What should we do before clicking?”</li><li>Run the sequence.</li><li>Explain one possible consequence of clicking.</li></ol></article>
+          <div class="card"><h3>Per team</h3><ul><li>Three charged BOLT or BOLT+ robots</li><li>Three programming devices with the Sphero Edu lesson open</li><li>A book or binder to act as a signal barrier</li><li>A clear floor or table space</li></ul></div>
+          <div class="card"><h3>Student roles</h3><ul><li><b>User:</b> the device sending a request</li><li><b>Website:</b> the service replying</li><li><b>Middle:</b> the interceptor BOLT</li><li><b>Observer:</b> notes the difference; rotate this role during free play</li></ul></div>
         </div>
-        <div class="section-heading"><p class="eyebrow">Debrief · 2 minutes</p><h2>Ask these questions</h2></div>
-        <div class="grid-3"><div class="card"><h3>Evidence</h3><p>“What two clues made you slow down?”</p></div><div class="card"><h3>Consequence</h3><p>“What might a fake link lead to?”</p></div><div class="card"><h3>Response</h3><p>“Who could you tell at school or at home?”</p></div></div>
-        <div class="callout" style="margin-top:20px"><strong>Key correction to make aloud:</strong> “The robot is an analogy. It can show a programmed alert, but it cannot decide a person’s intent or prove that a message is safe. A human still checks the evidence.”</div>
+        <div class="section-heading"><p class="eyebrow">Facilitator says</p><h2>Make the model concrete.</h2></div>
+        <div class="script"><p>“First, the user BOLT and website BOLT will pass messages directly. Then the middle BOLT will get between them. We’ll see the messages take a different path and, in the challenge, change what is delivered.”</p><p>“This is an isolated classroom model. We are not connecting to or testing a real website or network.”</p></div>
+        <div class="section-heading"><p class="eyebrow">Run the shortened Sphero lesson</p><h2>Start from the official program.</h2></div>
+        <div class="grid-2">
+          <article class="card blue"><span class="tag">1 · 3 min</span><h3>Show the original connection</h3><ol><li>Open the lesson’s linked program on all three devices.</li><li>Assign user, website, and middle roles; leave the middle out for this first run.</li><li>Set the user and website BOLTs about 12 inches apart.</li><li>Run the website program, then the user program.</li><li>Ask what the robots send back and forth.</li></ol></article>
+          <article class="card gold"><span class="tag gold">2 · 5 min</span><h3>Insert the middle BOLT</h3><ol><li>Place a book or binder between the first two robots.</li><li>Put the middle BOLT to the side with a clear line of sight to both.</li><li>Start the website and middle programs first.</li><li>Start the user program last.</li><li>Observe the delay and explain who can now see the messages.</li></ol></article>
+          <article class="card green"><span class="tag green">3 · 4 min</span><h3>Try the message-switch challenge</h3><ol><li>Use the official lesson’s step 5 and its starter-program comments.</li><li>Switch the message channels as the lesson directs.</li><li>Run the programs and test whether the middle BOLT changes what the user receives.</li></ol><p class="muted">If a group is still setting up, let it observe a ready group instead of rushing through new blocks.</p></article>
+          <article class="card"><span class="tag">4 · 3 min</span><h3>Debrief before free play</h3><ul><li>What was different from the original connection?</li><li>What could the middle BOLT see or change?</li><li>How was this different from the phishing skit?</li></ul></article>
+        </div>
+        <div class="section-heading"><p class="eyebrow">10 minutes · free play</p><h2>Give students time to try the robots.</h2></div>
+        <div class="grid-3"><article class="card blue"><h3>Drive</h3><p>Use the drive controls in the marked area at a low speed.</p></article><article class="card gold"><h3>Program</h3><p>Make a short path with two turns and a color change.</p></article><article class="card green"><h3>Rotate</h3><p>Swap who controls the device so everyone gets a turn.</p></article></div>
+        <div class="callout" style="margin-top:20px"><strong>Keep the play safe:</strong> Clear the floor, keep robots in their marked zones, stop each program before changing devices, and do not point the lesson at real networks or services.</div>
       </div>
     </section>
 
     <section id="extension" class="page" role="tabpanel" tabindex="-1">
       <div class="shell">
-        <div class="optional"><p class="eyebrow">Optional Exercise 4 · 8 minutes</p><h1>Code the Phishing Detector.</h1><p class="lede">Use this only after Exercise 3 is complete. Do not use it as part of the exit ticket.</p></div>
-        <div class="notice"><strong>Time rule:</strong><span>If teams are still building Exercise 3, skip this page. Students can meet the lesson goal without it.</span></div>
-        <div class="section-heading"><p class="eyebrow">Simplified challenge</p><h2>Turn clues into a choice.</h2></div>
-        <div class="grid-2"><div class="card gold"><h3>Student rule</h3><p>Count the warning clues on a message:</p><ul><li>Urgency</li><li>Unexpected prize</li><li>Password or personal-data request</li><li>Odd sender or link</li></ul><p><b>Two or more clues:</b> show red “PHISH?”<br><b>Fewer than two:</b> show yellow “CHECK.”</p></div><div class="card"><h3>Teacher model</h3><div class="block-sequence"><span class="block">Start</span><span class="arrow">→</span><span class="block">Set clues = 2</span><span class="arrow">→</span><span class="block">If clues ≥ 2</span><span class="arrow">→</span><span class="block" style="border-color:#efa39b;background:#ffe0dc">Red alert</span></div><div class="block-sequence"><span class="block">Else</span><span class="arrow">→</span><span class="block gold">Yellow: Check</span></div><p class="muted">This is a way to explain the algorithm, not a promise that every editor will use these exact block names.</p></div></div>
-        <div class="section-heading"><p class="eyebrow">If the blocks are available</p><h2>Exact student directions</h2></div>
-        <ol class="card"><li>Create a number variable named <b>clues</b>.</li><li>Set <b>clues</b> to 2 for the sample message.</li><li>Add an <b>if / then / else</b> block.</li><li>Condition: <b>clues is greater than or equal to 2</b>.</li><li>Then: set the Main LED to red and display “PHISH?” if a display block is available.</li><li>Else: set the Main LED to yellow and display “CHECK.”</li><li>Change the number to 0, 1, 2, and 3. Predict the color, run it, and explain the result.</li></ol>
-        <div class="section-heading"><p class="eyebrow">If the blocks are missing</p><h2>No-variable fallback</h2></div>
-        <div class="card blue"><p>Make two short programs instead:</p><div class="block-sequence"><span class="block">Program A</span><span class="arrow">→</span><span class="block" style="border-color:#efa39b;background:#ffe0dc">Red = PHISH?</span></div><div class="block-sequence"><span class="block">Program B</span><span class="arrow">→</span><span class="block gold">Yellow = CHECK</span></div><p>Students manually choose Program A when they count two or more clues and Program B when they count fewer. The thinking is the same; the code is simpler.</p></div>
-        <div class="callout" style="margin-top:20px"><strong>Do not add this to the exit ticket.</strong> The exit ticket checks phishing knowledge and the safe response, so every student can complete it even if this extension is skipped.</div>
+        <p class="eyebrow">Presenter support</p><h1>Make it easy to deliver.</h1>
+        <div class="section-heading"><p class="eyebrow">Short videos in the deck</p><h2>Two clips, three minutes total.</h2></div>
+        <div class="grid-2">
+          <article class="card blue"><span class="tag">2 minutes</span><h3>Phishing explained</h3><p>Cybernews: <a href="https://www.youtube.com/watch?v=HsUA3tguWZc" target="_blank" rel="noopener">What is Phishing? Phishing attacks explained in 2 minutes</a>.</p><p>Ask students to listen for what the fake message wants the person to do.</p></article>
+          <article class="card gold"><span class="tag gold">About 1 minute</span><h3>Person-in-the-middle animation</h3><p><a href="https://www.youtube.com/watch?v=ZZNZRITBrvs" target="_blank" rel="noopener">Man-in-the-middle attack animation</a>.</p><p>Preview it first. If it is unavailable or too technical, skip it and use the built-in diagrams.</p></article>
+        </div>
+        <div class="section-heading"><p class="eyebrow">For your preparation only</p><h2>Sphero’s longer demo is not in the timed session.</h2></div>
+        <div class="card"><p>Sphero’s lesson links to an 11-minute, 54-second InfoSec demonstration. It can help you prepare, but the in-class plan uses the short animation and the BOLT model so there is time for robot play.</p><p><a href="https://www.youtube.com/watch?v=GkexkyUbUd4" target="_blank" rel="noopener">Open Sphero’s recommended InfoSec man-in-the-middle demonstration</a>.</p></div>
+        <div class="section-heading"><p class="eyebrow">If you are presenting</p><h2>Choose the mode that fits you.</h2></div>
+        <div class="grid-2">
+          <article class="card blue"><h3>My guided version</h3><p>Sixteen short slides, a complete staged-demo script, presenter cues, discussion prompts, and a fallback for each video.</p><button class="btn small" data-page-go="present" data-select-presenter="guided">Open guided version</button></article>
+          <article class="card green"><h3>Colleague’s concise version</h3><p>Nine slides with the same learning goals, but more room for a confident presenter to speak naturally.</p><button class="btn small" data-page-go="present" data-select-presenter="colleague">Open concise version</button></article>
+        </div>
+        <div class="section-heading"><p class="eyebrow">Optional longer extension</p><h2>Skip latency detection in this 45-minute event.</h2></div>
+        <div class="callout"><strong>Why:</strong> Sphero’s extra detection challenge uses a number variable and time-elapsed logic and is likely to run beyond the event. The planned learning check does not depend on it.</div>
       </div>
     </section>
 
     <section id="printables" class="page" role="tabpanel" tabindex="-1">
       <div class="shell">
-        <p class="eyebrow">Print or display</p><h1>Student cards + exit ticket</h1><p class="lede">All examples are fictional. Do not ask students to type real passwords or open real links.</p>
-        <div class="section-heading"><p class="eyebrow">Message cards</p><h2>Cut these apart</h2></div>
+        <p class="eyebrow">Print or display</p><h1>Example message + exit ticket</h1>
+        <p class="lede">Everything here is fictional. No working link, real email, account, or student information is used.</p>
+        <div class="section-heading"><p class="eyebrow">Phishing example</p><h2>Find the warning signs.</h2></div>
         <div class="grid-2">
-          <article class="print-card"><span class="tag red">Card A · suspicious</span><h3>Game Rewards</h3><p><b>From:</b> rewards@play-gam3s.example</p><p><b>Subject:</b> You won 5,000 coins!</p><p>Click now in 10 minutes or lose your prize. Send your password to unlock it.</p><div class="fake-link">Unlock my prize</div><button class="btn small secondary" style="margin-top:14px" data-answer="a">Show teacher answer</button><div id="answer-a" class="answer"><b>Answer:</b> Suspicious. Clues: unexpected prize, urgent deadline, password request, odd-looking sender/link.</div></article>
-          <article class="print-card"><span class="tag green">Card B · still check</span><h3>School Club Update</h3><p><b>From:</b> clubadvisor@school.example</p><p><b>Subject:</b> Robotics Club meeting reminder</p><p>Our meeting is Thursday after school. Check the announcement in the school portal or ask the advisor if you have questions.</p><button class="btn small secondary" style="margin-top:14px" data-answer="b">Show teacher answer</button><div id="answer-b" class="answer"><b>Answer:</b> This example does not ask for a password or urgent click. Students should still verify through the school portal or a trusted adult instead of trusting a message blindly.</div></article>
+          <article class="print-card"><span class="tag red">Fictional message</span><h3>School Account Help</h3><p><b>From:</b> helpdesk@school-login.example.test</p><p><b>Subject:</b> Your account closes in 10 minutes</p><p>Your account will be locked today. Use this button to keep access and confirm your password.</p><div class="fake-link">[FAKE LINK · DO NOT CLICK]</div><button class="btn small secondary" style="margin-top:14px" data-answer="phish">Show teacher answer</button><div id="answer-phish" class="answer"><b>Answer:</b> Phishing-style message. Clues: urgency, unfamiliar sender/address, unexpected password request. A click could lead to a fake login page, stolen credentials, account takeover, or exposed private files/messages.</div></article>
+          <article class="print-card"><span class="tag">Robot role cards</span><h3>Three roles</h3><p><b>User:</b> sends a request to the website.</p><p><b>Website:</b> replies to the user.</p><p><b>Middle:</b> intercepts and relays messages in the Sphero model.</p><p><b>Observer:</b> notes the difference between the direct and intercepted paths.</p></article>
         </div>
-        <div class="section-heading"><p class="eyebrow">Exit ticket · 5 minutes</p><h2>Students answer independently</h2></div>
-        <div class="card"><p><b>Name:</b> _____________________________________ &nbsp; <b>Date:</b> ______________</p><ol><li><b>In your own words, what is phishing?</b><br><br>________________________________________________________________________________<br><br>________________________________________________________________________________</li><li><b>Name two clues that should make you slow down.</b><br><br>1. ____________________________________ &nbsp; 2. ____________________________________</li><li><b>Name one possible consequence of clicking a phishing link. What should you do instead?</b><br><br>Possible consequence: _____________________________________________________________<br><br>Instead I should: ________________________________________________________________</li></ol></div>
-        <details><summary>Teacher answer key</summary><div><p><b>1.</b> A fake message that tries to trick someone into clicking, sharing information, sending money, or downloading something unsafe.</p><p><b>2.</b> Any two: urgency, unexpected prize, password/personal-data request, odd sender/link, unexpected attachment.</p><p><b>3.</b> Possible consequences include a fake login page, stolen password, account takeover, exposed private information, malware, or money loss. Safe response: Stop, Check through a trusted source, and Tell/report to a trusted adult or approved school process.</p></div></details>
-        <div class="section-heading"><p class="eyebrow">Exit routine</p><h2>End safely</h2></div>
-        <div class="checklist"><div class="check"><input type="checkbox" id="end1"><label for="end1">Stop every BOLT program before reconnecting or putting robots away.</label></div><div class="check"><input type="checkbox" id="end2"><label for="end2">Disconnect robots and return each one to its numbered spot.</label></div><div class="check"><input type="checkbox" id="end3"><label for="end3">Collect exit tickets and remind students: do not click or reply; tell a trusted adult.</label></div></div>
-        <p class="footer-note">Content aligns to the revised 7th-grade lesson flow and the earlier Cyber Defenders presentation theme. For Sphero background, see <a href="https://edu.sphero.com/" target="_blank" rel="noopener">Sphero Edu</a>.</p>
+        <div class="section-heading"><p class="eyebrow">Exit ticket · 6 minutes</p><h2>Students answer on their own.</h2></div>
+        <div class="card"><p><b>Name:</b> _____________________________________ &nbsp; <b>Date:</b> ______________</p><ol><li><b>What is phishing?</b><br><br>________________________________________________________________________________</li><li><b>What does a person-in-the-middle do?</b><br><br>________________________________________________________________________________</li><li><b>How is it different from phishing? Name one safe action you can take.</b><br><br>Difference: ____________________________________________________________________<br><br>Safe action: ___________________________________________________________________</li></ol></div>
+        <details><summary>Teacher answer key</summary><div><p><b>1.</b> A fake message meant to trick someone into clicking, opening, or sharing information.</p><p><b>2.</b> A third party gets between communicating sides and may read or alter messages.</p><p><b>3.</b> Phishing is the deceptive lure; MITM is the interception in the communication path. Safe actions include using a trusted app/address or network, not entering details after an unexpected prompt, and asking a trusted adult or IT staff.</p></div></details>
+        <div class="section-heading"><p class="eyebrow">Close safely</p><h2>End the activity.</h2></div>
+        <div class="checklist"><div class="check"><input type="checkbox" id="end1"><label for="end1">Stop every BOLT program before changing devices or putting robots away.</label></div><div class="check"><input type="checkbox" id="end2"><label for="end2">Return robots to the correct charging spot.</label></div><div class="check"><input type="checkbox" id="end3"><label for="end3">Collect exit tickets and remind students not to share personal details in response to unexpected requests.</label></div></div>
+        <p class="footer-note">The BOLT activity is adapted from Sphero’s Cybersecurity collection. Open <a href="https://edu.sphero.com/collections/170" target="_blank" rel="noopener">the collection</a> or <a href="https://edu.sphero.com/cwists/preview/65563" target="_blank" rel="noopener">lesson 65563: Person-in-the-Middle Attacks: Who’s There?</a> for Sphero’s full lesson and starter program.</p>
       </div>
     </section>
   </main>
@@ -223,7 +284,10 @@
       history.replaceState(null,'','#'+id);
     }
     tabs.forEach(t=>t.addEventListener('click',()=>showPage(t.dataset.page)));
-    document.querySelectorAll('[data-page-go]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.pageGo)));
+    document.querySelectorAll('[data-page-go]').forEach(b=>b.addEventListener('click',()=>{
+      if(b.dataset.selectPresenter)setPresenter(b.dataset.selectPresenter);
+      showPage(b.dataset.pageGo);
+    }));
 
     let seconds=45*60, running=false, timer;
     const clock=document.getElementById('clockDisplay'), toggle=document.getElementById('clockToggle');
@@ -231,17 +295,48 @@
     toggle.addEventListener('click',()=>{running=!running;clearInterval(timer);if(running)timer=setInterval(()=>{if(seconds>0){seconds--;renderClock()}else{running=false;clearInterval(timer);renderClock()}},1000);renderClock()});
     document.getElementById('clockReset').addEventListener('click',()=>{running=false;clearInterval(timer);seconds=45*60;renderClock()});renderClock();
 
-    const slides=[...document.querySelectorAll('.slide')], title=document.getElementById('slideTitle'), counter=document.getElementById('slideCounter'), thumbs=document.getElementById('thumbs');
-    let slide=0;
-    slides.forEach((_,i)=>{const b=document.createElement('button');b.textContent=i+1;b.setAttribute('aria-label','Go to slide '+(i+1));b.addEventListener('click',()=>goSlide(i));thumbs.appendChild(b)});
-    function goSlide(i){slide=(i+slides.length)%slides.length;slides.forEach((s,n)=>s.classList.toggle('active',n===slide));[...thumbs.children].forEach((b,n)=>b.classList.toggle('active',n===slide));counter.textContent=(slide+1)+' / '+slides.length;title.textContent=slides[slide].querySelector('h1,h2')?.textContent||'Student presentation';}
+    const allSlides=[...document.querySelectorAll('.slide')];
+    const title=document.getElementById('slideTitle'), counter=document.getElementById('slideCounter'), thumbs=document.getElementById('thumbs');
+    const modeDescription=document.getElementById('modeDescription');
+    const presenterButtons=[...document.querySelectorAll('[data-presenter]')];
+    let selectedPresenter='guided', slides=[], slide=0;
+    function setPresenter(mode){
+      selectedPresenter=mode;
+      slides=allSlides.filter(s=>s.dataset.deck===mode);
+      presenterButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.presenter===mode)));
+      if(modeDescription)modeDescription.textContent=mode==='guided'
+        ?'More slides, short prompts, and optional presenter cues.'
+        :'A shorter slide path with room to speak naturally.';
+      thumbs.innerHTML='';
+      slides.forEach((_,i)=>{
+        const b=document.createElement('button');
+        b.textContent=i+1;
+        b.setAttribute('aria-label','Go to slide '+(i+1));
+        b.addEventListener('click',()=>goSlide(i));
+        thumbs.appendChild(b);
+      });
+      goSlide(0);
+    }
+    function goSlide(i){
+      slide=(i+slides.length)%slides.length;
+      allSlides.forEach(s=>s.classList.toggle('active',slides[slide]===s));
+      [...thumbs.children].forEach((b,n)=>b.classList.toggle('active',n===slide));
+      counter.textContent=(slide+1)+' / '+slides.length;
+      title.textContent=slides[slide].querySelector('h1,h2')?.textContent||'Student presentation';
+    }
+    presenterButtons.forEach(b=>b.addEventListener('click',()=>setPresenter(b.dataset.presenter)));
     function next(){goSlide(slide+1)}function prev(){goSlide(slide-1)}
     ['nextSlide','stageNext'].forEach(id=>document.getElementById(id).addEventListener('click',next));
     ['prevSlide','stagePrev'].forEach(id=>document.getElementById(id).addEventListener('click',prev));
     document.getElementById('fullScreen').addEventListener('click',()=>document.getElementById('stage').requestFullscreen?.());
-    document.addEventListener('keydown',e=>{if(!document.getElementById('present').classList.contains('active'))return;if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev()});goSlide(0);
+    document.addEventListener('keydown',e=>{if(!document.getElementById('present').classList.contains('active'))return;if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev()});
+    setPresenter('guided');
 
-    document.querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>{const a=document.getElementById('answer-'+b.dataset.answer);a.classList.toggle('show');b.textContent=a.classList.contains('show')?'Hide teacher answer':'Show teacher answer'}));
+    document.querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>{
+      const a=document.getElementById('answer-'+b.dataset.answer);
+      a.classList.toggle('show');
+      b.textContent=a.classList.contains('show')?'Hide teacher answer':'Show teacher answer';
+    }));
     const hash=location.hash.slice(1);if(pages.some(p=>p.id===hash))showPage(hash);
   </script>
 </body>
